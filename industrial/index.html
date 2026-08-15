@@ -29,7 +29,8 @@
   <header class="control-bar">
     <a class="brand" href="../">Z/<span>ARCHIVE</span></a>
     <label class="search"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="SEARCH NAILS, HVAC, FOOD…" aria-label="Search template rooms"></label>
-    <div class="control-meta"><span id="room-count">07 ROOMS</span><a href="../liquid-glass/">LIQUID VIEW ↗</a></div>
+    <button class="theme-control" id="theme-next" type="button">THEME / <span id="theme-name">CONCRETE</span> →</button>
+    <div class="control-meta"><span id="room-count">07 SURFACES</span><a href="../liquid-glass/">LIQUID VIEW ↗</a></div>
   </header>
 
   <aside class="rail" aria-label="Showroom position">
@@ -48,53 +49,60 @@
       <div class="room-spec"><span>CONCRETE / 01</span><span>PHX · 2026</span></div>
     </section>
 
-    <section class="corridor" id="rooms" aria-label="Template rooms">
-      <article class="room left" id="room-nail" data-room data-search="nail salon beauty appointments manicure pedicure booking">
-        <div class="room-number">01</div>
-        <div class="display-bay">
-          <div class="fixture"><span>LIVE DISPLAY / 01</span><span>BOOKING</span></div>
-          <div class="screen"><iframe src="https://zda1-hub.github.io/nail-salon-templates/" title="Nail salon template preview" loading="lazy" tabindex="-1"></iframe></div>
-        </div>
-        <div class="room-copy"><p>Beauty · appointments</p><h2>Nail<br>Salon</h2><span>Polished booking-first concepts for modern nail studios.</span><button data-open data-title="Nail Salon" data-url="https://zda1-hub.github.io/nail-salon-templates/">Enter website ↗</button></div>
+    <section class="corridor" id="rooms" aria-label="Template wall gallery">
+      <article class="chamber" data-chamber>
+        <div class="chamber-id"><span>CHAMBER</span><strong>01</strong></div>
+        <section class="surface surface-left" id="room-nail" data-room data-search="nail salon beauty appointments manicure pedicure booking">
+          <div class="surface-label"><span>01 / BEAUTY</span><strong>Nail Salon</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/nail-salon-templates/" title="Nail salon template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Nail Salon" data-url="https://zda1-hub.github.io/nail-salon-templates/">View website ↗</button>
+        </section>
+        <section class="surface surface-center" id="room-barber" data-room data-search="barber shop haircut grooming appointments booking">
+          <div class="surface-label"><span>02 / GROOMING</span><strong>Barber Shop</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/barber-shop-templates/" title="Barber shop template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Barber Shop" data-url="https://zda1-hub.github.io/barber-shop-templates/">View website ↗</button>
+        </section>
+        <section class="surface surface-right" id="room-mechanic" data-room data-search="mechanic auto automotive repair garage service car appointment">
+          <div class="surface-label"><span>03 / AUTOMOTIVE</span><strong>Mechanic</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/mechanic-templates/" title="Mechanic template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Mechanic" data-url="https://zda1-hub.github.io/mechanic-templates/">View website ↗</button>
+        </section>
+        <div class="floor-mark">SCROLL TO CHAMBER 02 ↓</div>
       </article>
 
-      <article class="room right" id="room-barber" data-room data-search="barber shop haircut grooming appointments booking">
-        <div class="room-number">02</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 02</span><span>BOOKING</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/barber-shop-templates/" title="Barber shop template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Grooming · appointments</p><h2>Barber<br>Shop</h2><span>Direct, local, personality-led pages built to reserve chairs.</span><button data-open data-title="Barber Shop" data-url="https://zda1-hub.github.io/barber-shop-templates/">Enter website ↗</button></div>
+      <article class="chamber" data-chamber>
+        <div class="chamber-id"><span>CHAMBER</span><strong>02</strong></div>
+        <section class="surface surface-left" id="room-hvac" data-room data-search="hvac heating cooling air conditioning emergency home service quote">
+          <div class="surface-label"><span>04 / HOME SERVICE</span><strong>HVAC</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/hvac-templates/" title="HVAC template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="HVAC" data-url="https://zda1-hub.github.io/hvac-templates/">View website ↗</button>
+        </section>
+        <section class="surface surface-center" id="room-roofing" data-room data-search="roofing roofer roof contractor inspection estimate quote home service">
+          <div class="surface-label"><span>05 / CONTRACTOR</span><strong>Roofing</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/roofing-templates/" title="Roofing template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Roofing" data-url="https://zda1-hub.github.io/roofing-templates/">View website ↗</button>
+        </section>
+        <section class="surface surface-right" id="room-goods" data-room data-search="clothing apparel custom goods bags hats embroidery printing ecommerce orders">
+          <div class="surface-label"><span>06 / COMMERCE</span><strong>Custom Goods</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/clothing-custom-goods-templates/" title="Clothing and custom goods template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Clothing / Custom Goods" data-url="https://zda1-hub.github.io/clothing-custom-goods-templates/">View website ↗</button>
+        </section>
+        <div class="floor-mark">SCROLL TO CHAMBER 03 ↓</div>
       </article>
 
-      <article class="room left" id="room-mechanic" data-room data-search="mechanic auto automotive repair garage service car appointment">
-        <div class="room-number">03</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 03</span><span>SERVICE</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/mechanic-templates/" title="Mechanic template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Automotive · service</p><h2>Auto<br>Repair</h2><span>Trust-first layouts for repairs, pricing, proof, and scheduling.</span><button data-open data-title="Mechanic" data-url="https://zda1-hub.github.io/mechanic-templates/">Enter website ↗</button></div>
+      <article class="chamber final-chamber" data-chamber>
+        <div class="chamber-id"><span>CHAMBER</span><strong>03</strong></div>
+        <div class="archive-wall archive-wall-left"><span>21</span><p>Design directions<br>inside the archive.</p></div>
+        <section class="surface surface-center feature-surface" id="room-food" data-room data-search="restaurant food dining cafe menu reservation table hospitality">
+          <div class="surface-label"><span>07 / HOSPITALITY</span><strong>Food & Restaurant</strong></div>
+          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/restaurant-templates/" title="Restaurant template preview" loading="lazy" tabindex="-1"></iframe></div>
+          <button data-open data-title="Food / Restaurant" data-url="https://zda1-hub.github.io/restaurant-templates/">View website ↗</button>
+        </section>
+        <div class="archive-wall archive-wall-right"><span>07</span><p>Business categories.<br>One clear next action.</p></div>
+        <div class="floor-mark">END OF WALL ARCHIVE ↓</div>
       </article>
 
-      <article class="room right" id="room-hvac" data-room data-search="hvac heating cooling air conditioning emergency home service quote">
-        <div class="room-number">04</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 04</span><span>CALLS</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/hvac-templates/" title="HVAC template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Home service · calls</p><h2>HVAC</h2><span>Fast service funnels for emergencies, estimates, and bookings.</span><button data-open data-title="HVAC" data-url="https://zda1-hub.github.io/hvac-templates/">Enter website ↗</button></div>
-      </article>
-
-      <article class="room left" id="room-roofing" data-room data-search="roofing roofer roof contractor inspection estimate quote home service">
-        <div class="room-number">05</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 05</span><span>QUOTES</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/roofing-templates/" title="Roofing template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Home service · quotes</p><h2>Roofing</h2><span>Credibility-led concepts with a direct inspection request path.</span><button data-open data-title="Roofing" data-url="https://zda1-hub.github.io/roofing-templates/">Enter website ↗</button></div>
-      </article>
-
-      <article class="room right" id="room-goods" data-room data-search="clothing apparel custom goods bags hats embroidery printing ecommerce orders">
-        <div class="room-number">06</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 06</span><span>ORDERS</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/clothing-custom-goods-templates/" title="Clothing and custom goods template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Commerce · orders</p><h2>Custom<br>Goods</h2><span>Visual storefronts for clothing, bags, hats, and custom builds.</span><button data-open data-title="Clothing / Custom Goods" data-url="https://zda1-hub.github.io/clothing-custom-goods-templates/">Enter website ↗</button></div>
-      </article>
-
-      <article class="room left" id="room-food" data-room data-search="restaurant food dining cafe menu reservation table hospitality">
-        <div class="room-number">07</div>
-        <div class="display-bay"><div class="fixture"><span>LIVE DISPLAY / 07</span><span>RESERVE</span></div><div class="screen"><iframe src="https://zda1-hub.github.io/restaurant-templates/" title="Restaurant template preview" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="room-copy"><p>Hospitality · reserve</p><h2>Food &<br>Restaurant</h2><span>Atmospheric menus with hours and reservations kept close.</span><button data-open data-title="Food / Restaurant" data-url="https://zda1-hub.github.io/restaurant-templates/">Enter website ↗</button></div>
-      </article>
-
-      <div class="no-results" id="no-results"><p>NO MATCH FOUND</p><button id="clear-search" type="button">Clear search ↗</button></div>
+      <div class="no-results" id="no-results"><p>NO SURFACE FOUND</p><button id="clear-search" type="button">Clear search ↗</button></div>
     </section>
 
     <section class="exit-room">
@@ -110,6 +118,10 @@
     <div class="preview-bar"><div><span>LIVE SITE /</span><strong id="preview-title">Template</strong></div><a id="external-link" href="#" target="_blank" rel="noreferrer">Open in new tab ↗</a><button id="close-preview" type="button" aria-label="Close preview">Close ×</button></div>
     <iframe id="preview-frame" title="Full website preview"></iframe>
   </dialog>
+  <div class="theme-toast" id="theme-toast" role="status" aria-live="polite">
+    <div><i></i><span>Changed theme to <strong id="toast-theme">Concrete</strong></span></div>
+    <button id="toast-next" type="button">Next theme →</button>
+  </div>
   <div class="noise" aria-hidden="true"></div>
   <script src="./script.js"></script>
 </body>

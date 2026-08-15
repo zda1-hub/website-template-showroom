@@ -1,20 +1,27 @@
 const loader = document.querySelector("#loader");
 const loaderPercent = document.querySelector("#loader-percent");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let loadingTimer;
 
-if (reduceMotion) {
-  loader.classList.add("done");
-} else {
+function runLoader() {
+  clearInterval(loadingTimer);
+  loaderPercent.textContent = "00";
+  loader.classList.remove("done");
+  if (reduceMotion) {
+    loader.classList.add("done");
+    return;
+  }
   let percent = 0;
-  const loading = setInterval(() => {
+  loadingTimer = setInterval(() => {
     percent = Math.min(100, percent + Math.ceil(Math.random() * 15));
     loaderPercent.textContent = String(percent).padStart(2, "0");
     if (percent === 100) {
-      clearInterval(loading);
+      clearInterval(loadingTimer);
       setTimeout(() => loader.classList.add("done"), 260);
     }
   }, 95);
 }
+runLoader();
 
 const stage = document.querySelector("#carousel-stage");
 const cards = [...document.querySelectorAll("[data-card]")];
@@ -77,6 +84,7 @@ stage.addEventListener("wheel", (event) => {
 }, { passive: false });
 
 stage.addEventListener("pointerdown", (event) => {
+  if (event.target.closest("[data-open]")) return;
   dragging = true;
   moved = false;
   lastX = event.clientX;
@@ -140,3 +148,19 @@ function closePreview() {
 }
 document.querySelector("#close-preview").addEventListener("click", closePreview);
 preview.addEventListener("click", (event) => { if (event.target === preview) closePreview(); });
+
+function restartExperience() {
+  if (preview.open) closePreview();
+  search.value = "";
+  filterCards();
+  offset = 0;
+  velocity = 0;
+  dragging = false;
+  moved = false;
+  stage.classList.remove("dragging");
+  runLoader();
+}
+
+document.querySelector("#restart-home").addEventListener("click", restartExperience);
+document.querySelector("#restart-footer").addEventListener("click", restartExperience);
+document.querySelector("#restart-preview").addEventListener("click", restartExperience);

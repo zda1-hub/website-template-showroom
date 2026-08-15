@@ -25,6 +25,7 @@ if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 document.querySelector("#skip-loader").addEventListener("click", finishLoader);
 
 const rooms = [...document.querySelectorAll("[data-room]")];
+const chambers = [...document.querySelectorAll("[data-chamber]")];
 const search = document.querySelector("#search");
 const roomCount = document.querySelector("#room-count");
 const noResults = document.querySelector("#no-results");
@@ -37,8 +38,12 @@ function filterRooms() {
     room.hidden = !matches;
     if (matches) visible += 1;
   });
-  roomCount.textContent = `${String(visible).padStart(2, "0")} ROOM${visible === 1 ? "" : "S"}`;
+  chambers.forEach((chamber) => {
+    chamber.hidden = !chamber.querySelector("[data-room]:not([hidden])");
+  });
+  roomCount.textContent = `${String(visible).padStart(2, "0")} SURFACE${visible === 1 ? "" : "S"}`;
   noResults.classList.toggle("show", visible === 0);
+  sizeDisplays();
 }
 
 search.addEventListener("input", filterRooms);
@@ -51,11 +56,11 @@ document.querySelector("#clear-search").addEventListener("click", () => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => entry.target.classList.toggle("in-view", entry.isIntersecting));
 }, { threshold: 0.34 });
-rooms.forEach((room) => observer.observe(room));
+chambers.forEach((chamber) => observer.observe(chamber));
 
 function sizeDisplays() {
-  document.querySelectorAll(".screen").forEach((screen) => {
-    screen.style.setProperty("--screen-width", screen.clientWidth);
+  document.querySelectorAll(".surface-screen").forEach((screen) => {
+    screen.style.setProperty("--surface-scale", screen.clientWidth / 1440);
   });
 }
 addEventListener("resize", sizeDisplays);
@@ -87,6 +92,40 @@ function closePreview() {
 }
 document.querySelector("#close-preview").addEventListener("click", closePreview);
 preview.addEventListener("click", (event) => { if (event.target === preview) closePreview(); });
+
+const themes = [
+  { id: "concrete", name: "Concrete" },
+  { id: "oxide", name: "Oxide" },
+  { id: "cobalt", name: "Cobalt" },
+  { id: "moss", name: "Moss" },
+];
+const themeName = document.querySelector("#theme-name");
+const toast = document.querySelector("#theme-toast");
+const toastTheme = document.querySelector("#toast-theme");
+let themeIndex = Math.max(0, themes.findIndex((theme) => theme.id === localStorage.getItem("industrial-theme")));
+let toastTimer;
+
+function applyTheme(showConfirmation = true) {
+  const theme = themes[themeIndex];
+  body.dataset.theme = theme.id;
+  themeName.textContent = theme.name.toUpperCase();
+  toastTheme.textContent = theme.name;
+  localStorage.setItem("industrial-theme", theme.id);
+  if (showConfirmation) {
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 3600);
+  }
+}
+
+function nextTheme() {
+  themeIndex = (themeIndex + 1) % themes.length;
+  applyTheme();
+}
+
+document.querySelector("#theme-next").addEventListener("click", nextTheme);
+document.querySelector("#toast-next").addEventListener("click", nextTheme);
+applyTheme(false);
 
 document.querySelector("#copy-brief").addEventListener("click", async () => {
   const message = "Hi — I explored your website template showroom and would like a custom website preview for my business. My business type is: ____. The main action I want customers to take is: ____.";
