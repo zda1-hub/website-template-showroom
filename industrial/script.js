@@ -1,7 +1,5 @@
 const walls = [...document.querySelectorAll("[data-wall]")];
 const navButtons = [...document.querySelectorAll("[data-wall-nav]")];
-const ring = document.querySelector("#room-ring");
-const viewport = document.querySelector("#room-viewport");
 const selectedTitle = document.querySelector("#selected-title");
 const roomPosition = document.querySelector("#room-position");
 const roomName = document.querySelector("#room-name");
@@ -11,11 +9,6 @@ const toastCopy = document.querySelector("#toast-copy");
 const schemeState = walls.map(() => 0);
 const fallbackFilters = ["none", "hue-rotate(28deg) saturate(1.18)", "hue-rotate(185deg) saturate(.92) contrast(1.08)", "sepia(.42) hue-rotate(345deg) saturate(1.25)"];
 let selected = 0;
-let rotationStep = 0;
-let dragging = false;
-let moved = false;
-let startX = 0;
-let dragX = 0;
 let toastTimer;
 
 function finishLoader() {
@@ -38,25 +31,12 @@ if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
 }
 document.querySelector("#skip-loader").addEventListener("click", finishLoader);
 
-function closestStepFor(index) {
-  let delta = index - selected;
-  if (delta > 4) delta -= 8;
-  if (delta < -4) delta += 8;
-  return rotationStep + delta;
-}
-
 function selectWall(index, instant = false) {
   const normalized = (index + walls.length) % walls.length;
-  rotationStep = closestStepFor(normalized);
   selected = normalized;
-  if (instant) ring.style.transition = "none";
-  ring.style.setProperty("--room-rotation", `${rotationStep * -45}deg`);
-  if (instant) requestAnimationFrame(() => ring.style.removeProperty("transition"));
 
   walls.forEach((wall, wallIndex) => {
-    const difference = Math.min(Math.abs(wallIndex - selected), walls.length - Math.abs(wallIndex - selected));
     wall.classList.toggle("is-active", wallIndex === selected);
-    wall.classList.toggle("is-near", difference === 1);
   });
   navButtons.forEach((button, buttonIndex) => button.classList.toggle("active", buttonIndex === selected));
 
@@ -131,52 +111,24 @@ function nextScheme(showToast = true) {
 }
 
 walls.forEach((wall, index) => {
-  wall.querySelector(".wall-hit").addEventListener("click", (event) => {
-    if (moved) { event.preventDefault(); moved = false; return; }
+  wall.querySelector(".wall-hit").addEventListener("click", () => {
     selectWall(index);
+    openWebsite();
   });
+  wall.addEventListener("pointerenter", () => selectWall(index));
+  wall.addEventListener("focusin", () => selectWall(index));
   wall.querySelector("iframe").addEventListener("load", () => {
     applySchemeToFrame(wall.querySelector("iframe"), wall, schemeState[index]);
     sizeWalls();
   });
 });
 navButtons.forEach((button, index) => button.addEventListener("click", () => selectWall(index)));
-document.querySelector("#previous-wall").addEventListener("click", () => selectWall(selected - 1));
-document.querySelector("#next-wall").addEventListener("click", () => selectWall(selected + 1));
 document.querySelector("#next-scheme").addEventListener("click", () => nextScheme());
-
-viewport.addEventListener("pointerdown", (event) => {
-  if (event.target.closest(".rotate")) return;
-  dragging = true;
-  moved = false;
-  startX = event.clientX;
-  dragX = 0;
-  viewport.classList.add("dragging");
-  viewport.setPointerCapture(event.pointerId);
-});
-viewport.addEventListener("pointermove", (event) => {
-  if (!dragging) return;
-  dragX = event.clientX - startX;
-  if (Math.abs(dragX) > 4) moved = true;
-  ring.style.setProperty("--room-rotation", `${rotationStep * -45 + dragX * .08}deg`);
-});
-viewport.addEventListener("pointerup", () => {
-  if (!dragging) return;
-  dragging = false;
-  viewport.classList.remove("dragging");
-  if (dragX > 70) selectWall(selected - 1);
-  else if (dragX < -70) selectWall(selected + 1);
-  else selectWall(selected);
-});
-viewport.addEventListener("pointercancel", () => {
-  dragging = false;
-  viewport.classList.remove("dragging");
-  selectWall(selected);
-});
 
 addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") selectWall(selected - 1);
   if (event.key === "ArrowRight") selectWall(selected + 1);
+  if (event.key === "Enter" && !preview.open) openWebsite();
 });
 
 const preview = document.querySelector("#preview");
@@ -193,11 +145,13 @@ function openWebsite() {
     const changedInsideWebsite = applySchemeToFrame(previewFrame, wall, schemeState[selected]);
     previewFrame.style.filter = changedInsideWebsite ? "none" : fallbackFilters[schemeState[selected]] || "none";
   };
-  preview.showModal();
+  if (typeof preview.showModal === "function") preview.showModal();
+  else preview.setAttribute("open", "");
 }
 
 function closeWebsite() {
-  preview.close();
+  if (typeof preview.close === "function") preview.close();
+  else preview.removeAttribute("open");
   previewFrame.src = "about:blank";
 }
 document.querySelector("#view-website").addEventListener("click", openWebsite);
