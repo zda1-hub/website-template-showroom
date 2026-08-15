@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A bright concrete gallery where eight architectural wall surfaces become live websites." />
+  <meta name="description" content="A bright concrete gallery where walls, ceiling, and floor become eight live websites." />
   <title>Z/Archive — Website gallery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=gallery-corridor-4" />
+  <link rel="stylesheet" href="./styles.css?v=gallery-surfaces-5" />
 </head>
 <body class="is-loading">
   <div class="loader" id="loader" role="status" aria-label="Preparing the eight-wall showroom">
@@ -24,7 +24,7 @@
   </header>
 
   <main class="room-app">
-    <section class="room-viewport" id="room-viewport" aria-label="Bright architectural gallery with eight clickable website walls">
+    <section class="room-viewport" id="room-viewport" aria-label="Bright gallery with clickable walls, ceiling, and floor">
       <div class="architectural-shell" aria-hidden="true">
         <div class="ceiling-light"></div>
         <div class="floor-grid"></div>
@@ -82,9 +82,9 @@
       </div>
 
       <div class="room-core">
-        <span class="core-kicker">GALLERY / 08 WEBSITE WALLS</span>
+        <span class="core-kicker">GALLERY / 08 WEBSITE SURFACES</span>
         <h1>Choose a wall.</h1>
-        <p>Each recessed surface is a live website. Click one to enter its full layout.</p>
+        <p>Six walls, the ceiling, and the floor are live websites. Click one to enter.</p>
         <div class="selected-copy"><span>SELECTED WALL</span><strong id="selected-title">Nail Salon</strong><small id="scheme-name">COLOR SCHEME 01 / 03</small></div>
         <div class="core-actions">
           <button class="scheme-button" id="next-scheme" type="button"><span>Change this website</span><strong>NEXT COLOR</strong><b>↻</b></button>
@@ -111,6 +111,6 @@
   </dialog>
 
   <div class="scheme-toast" id="scheme-toast" role="status" aria-live="polite"><i></i><span id="toast-copy">Nail Salon changed to color scheme 02</span></div>
-  <script src="./script.js?v=gallery-corridor-4"></script>
+  <script src="./script.js?v=gallery-surfaces-5"></script>
 </body>
 </html>
