@@ -1,196 +1,124 @@
-const walls = [...document.querySelectorAll("[data-wall]")];
-const navButtons = [...document.querySelectorAll("[data-wall-nav]")];
-const selectedTitle = document.querySelector("#selected-title");
-const roomPosition = document.querySelector("#room-position");
-const roomName = document.querySelector("#room-name");
-const schemeName = document.querySelector("#scheme-name");
-const toast = document.querySelector("#scheme-toast");
-const toastCopy = document.querySelector("#toast-copy");
-const searchInput = document.querySelector("#template-search");
-const searchCount = document.querySelector("#search-count");
-const schemeState = walls.map(() => 0);
-const fallbackFilters = ["none", "hue-rotate(28deg) saturate(1.18)", "hue-rotate(185deg) saturate(.92) contrast(1.08)", "sepia(.42) hue-rotate(345deg) saturate(1.25)"];
-let selected = 0;
-let toastTimer;
-let searchMatches = walls.map((_, index) => index);
+const templates = [
+  { name: "Nail Salon", category: "BEAUTY / APPOINTMENTS", url: "https://zda1-hub.github.io/nail-salon-templates/", art: "linear-gradient(135deg,#e3b9c8 0%,#7c4359 100%)" },
+  { name: "Barber Shop", category: "GROOMING / BOOKINGS", url: "https://zda1-hub.github.io/barber-shop-templates/", art: "linear-gradient(135deg,#d8d0c5 0%,#342b29 100%)" },
+  { name: "Mechanic", category: "AUTO / REPAIR", url: "https://zda1-hub.github.io/mechanic-templates/", art: "linear-gradient(135deg,#e8a93f 0%,#30343f 100%)" },
+  { name: "HVAC", category: "HOME / SERVICE", url: "https://zda1-hub.github.io/hvac-templates/", art: "linear-gradient(135deg,#90c9d3 0%,#174b78 100%)" },
+  { name: "Roofing", category: "HOME / CONTRACTOR", url: "https://zda1-hub.github.io/roofing-templates/", art: "linear-gradient(135deg,#e47754 0%,#262b2b 100%)" },
+  { name: "Custom Goods", category: "CLOTHING / BAGS / HATS", url: "https://zda1-hub.github.io/clothing-custom-goods-templates/", art: "linear-gradient(135deg,#c4916d 0%,#392419 100%)" },
+  { name: "Restaurant", category: "FOOD / RESERVATIONS", url: "https://zda1-hub.github.io/restaurant-templates/", art: "linear-gradient(135deg,#be6548 0%,#3d251b 100%)" }
+];
 
-function finishLoader() {
-  document.querySelector("#loader").classList.add("done");
-  document.body.classList.remove("is-loading");
-}
+const screens = Object.fromEntries([...document.querySelectorAll(".screen")].map((screen) => [screen.id.replace("-screen", ""), screen]));
+const navButtons = [...document.querySelectorAll("[data-screen]")];
+const themeButtons = [...document.querySelectorAll("[data-theme]")];
+const caseView = document.querySelector("#case-view");
+const caseFrame = document.querySelector("#case-frame");
+const notice = document.querySelector("#notice");
+let activeTemplate = 0;
+let activeTheme = 0;
+let noticeTimer;
 
-if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  finishLoader();
-} else {
-  let count = 1;
-  const counter = setInterval(() => {
-    count += 1;
-    document.querySelector("#loader-count").textContent = String(Math.min(8, count)).padStart(2, "0");
-    if (count >= 8) {
-      clearInterval(counter);
-      setTimeout(finishLoader, 220);
-    }
-  }, 105);
-}
-document.querySelector("#skip-loader").addEventListener("click", finishLoader);
-
-function selectWall(index, instant = false) {
-  const normalized = (index + walls.length) % walls.length;
-  selected = normalized;
-
-  walls.forEach((wall, wallIndex) => {
-    wall.classList.toggle("is-active", wallIndex === selected);
+function showScreen(name) {
+  Object.entries(screens).forEach(([screenName, screen]) => {
+    const isActive = screenName === name;
+    screen.hidden = !isActive;
+    screen.classList.toggle("is-active", isActive);
   });
-  navButtons.forEach((button, buttonIndex) => button.classList.toggle("active", buttonIndex === selected));
-
-  const wall = walls[selected];
-  const count = Number(wall.dataset.schemeCount || 3);
-  selectedTitle.textContent = wall.dataset.title;
-  roomName.textContent = wall.dataset.short;
-  roomPosition.textContent = `WALL ${String(selected + 1).padStart(2, "0")} / 08`;
-  schemeName.textContent = `COLOR SCHEME ${String(schemeState[selected] + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`;
-  sizeWalls();
+  navButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.screen === name));
 }
 
-function sizeWalls() {
-  walls.forEach((wall) => {
-    const iframe = wall.querySelector("iframe");
-    const scale = Math.max(wall.clientWidth / 1440, wall.clientHeight / 900);
-    iframe.style.setProperty("--wall-scale", scale);
-    wall.style.setProperty("--wall-scale", scale);
-  });
+function setFrameFilter() {
+  const filters = ["none", "saturate(1.45) contrast(1.04)", "sepia(.16) saturate(.84) hue-rotate(338deg) brightness(1.04)"];
+  caseFrame.style.filter = filters[activeTheme];
 }
-addEventListener("resize", sizeWalls);
-sizeWalls();
 
-function childSchemeButtons(frame, wall) {
+function directionButtons(frame) {
   try {
     const doc = frame.contentDocument;
-    if (!doc) return [];
-    if (wall.dataset.customColors || wall.dataset.roomColors) return [];
-    const selectors = [
-      ".direction-options button",
-      ".theme-options button",
-      ".direction-tabs button",
-      ".demo-bar .direction-tabs button",
-    ];
+    const selectors = [".direction-tabs button", ".direction-options button", ".theme-options button", ".demo-bar .direction-tabs button"];
     for (const selector of selectors) {
       const buttons = [...doc.querySelectorAll(selector)];
-      if (buttons.length > 1) return buttons;
+      if (buttons.length >= 3) return buttons;
     }
-  } catch (_) {
-    return [];
-  }
+  } catch (_) { /* cross-origin previews use the visual fallback until opened on GitHub Pages */ }
   return [];
 }
 
-function applySchemeToFrame(frame, wall, schemeIndex) {
-  const buttons = childSchemeButtons(frame, wall);
-  if (buttons[schemeIndex]) {
-    buttons[schemeIndex].click();
-    return true;
-  }
-  return false;
+function applyTheme() {
+  const buttons = directionButtons(caseFrame);
+  const changedLiveTemplate = Boolean(buttons[activeTheme]);
+  if (changedLiveTemplate) buttons[activeTheme].click();
+  if (changedLiveTemplate) caseFrame.style.filter = "none";
+  else setFrameFilter();
+  themeButtons.forEach((button) => button.classList.toggle("is-active", Number(button.dataset.theme) === activeTheme));
+  document.querySelector("#theme-note").textContent = `THEME ${String(activeTheme + 1).padStart(2, "0")} LOADED`;
 }
 
-function nextScheme(showToast = true) {
-  const wall = walls[selected];
-  const count = Number(wall.dataset.schemeCount || 3);
-  schemeState[selected] = (schemeState[selected] + 1) % count;
-  const frame = wall.querySelector("iframe");
-  const changedInsideWebsite = applySchemeToFrame(frame, wall, schemeState[selected]);
-  wall.dataset.fallbackScheme = changedInsideWebsite ? "0" : String(schemeState[selected]);
-  schemeName.textContent = `COLOR SCHEME ${String(schemeState[selected] + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`;
-  if (document.querySelector("#preview").open) {
-    const previewFrame = document.querySelector("#preview-frame");
-    if (!applySchemeToFrame(previewFrame, wall, schemeState[selected])) previewFrame.style.filter = fallbackFilters[schemeState[selected]] || "none";
-  }
-  if (showToast) {
-    toastCopy.textContent = `${wall.dataset.title} changed to color scheme ${String(schemeState[selected] + 1).padStart(2, "0")}`;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
-  }
+function showNotice(text) {
+  notice.textContent = text;
+  notice.classList.add("is-visible");
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => notice.classList.remove("is-visible"), 1900);
 }
 
-function filterWalls(query) {
-  const normalized = query.trim().toLowerCase();
-  searchMatches = [];
-  walls.forEach((wall, index) => {
-    const searchable = `${wall.dataset.title} ${wall.dataset.short} ${wall.querySelector(".wall-label span").textContent}`.toLowerCase();
-    const matches = !normalized || searchable.includes(normalized);
-    wall.classList.toggle("is-search-miss", !matches);
-    wall.querySelector(".wall-hit").disabled = !matches;
-    navButtons[index].classList.toggle("is-search-miss", !matches);
-    navButtons[index].disabled = !matches;
-    if (matches) searchMatches.push(index);
+function updateWorkStage() {
+  const current = templates[activeTemplate];
+  const previous = templates[(activeTemplate + templates.length - 1) % templates.length];
+  const next = templates[(activeTemplate + 1) % templates.length];
+  [[document.querySelector(".project-frame-left"), previous], [document.querySelector(".project-frame-main"), current], [document.querySelector(".project-frame-right"), next]].forEach(([frame, item]) => {
+    frame.style.backgroundImage = item.art;
+    frame.dataset.label = item.name.toUpperCase();
   });
-  searchCount.textContent = `${String(searchMatches.length).padStart(2, "0")} / 08`;
-  if (normalized && searchMatches.length) selectWall(searchMatches[0]);
+  document.querySelector("#work-count").textContent = `${String(activeTemplate + 1).padStart(2, "0")} / 07`;
+  document.querySelector("#work-category").textContent = current.category;
+  document.querySelector("#work-name").textContent = current.name;
 }
 
-searchInput.addEventListener("input", () => filterWalls(searchInput.value));
-searchInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && searchMatches.length) {
-    event.preventDefault();
-    event.stopPropagation();
-    selectWall(searchMatches[0]);
-    openWebsite();
-  }
-  if (event.key === "Escape") {
-    searchInput.value = "";
-    filterWalls("");
-    searchInput.blur();
-  }
-});
-
-walls.forEach((wall, index) => {
-  wall.querySelector(".wall-hit").addEventListener("click", () => {
-    selectWall(index);
-    openWebsite();
-  });
-  wall.addEventListener("pointerenter", () => selectWall(index));
-  wall.addEventListener("focusin", () => selectWall(index));
-  wall.querySelector("iframe").addEventListener("load", () => {
-    applySchemeToFrame(wall.querySelector("iframe"), wall, schemeState[index]);
-    sizeWalls();
-  });
-});
-navButtons.forEach((button, index) => button.addEventListener("click", () => selectWall(index)));
-document.querySelector("#next-scheme").addEventListener("click", () => nextScheme());
-
-addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") selectWall(selected - 1);
-  if (event.key === "ArrowRight") selectWall(selected + 1);
-  if (event.key === "Enter" && !preview.open) openWebsite();
-});
-
-const preview = document.querySelector("#preview");
-const previewFrame = document.querySelector("#preview-frame");
-const previewTitle = document.querySelector("#preview-title");
-const externalLink = document.querySelector("#external-link");
-
-function openWebsite() {
-  const wall = walls[selected];
-  previewTitle.textContent = wall.dataset.title;
-  externalLink.href = wall.dataset.url;
-  previewFrame.src = wall.dataset.url;
-  previewFrame.onload = () => {
-    const changedInsideWebsite = applySchemeToFrame(previewFrame, wall, schemeState[selected]);
-    previewFrame.style.filter = changedInsideWebsite ? "none" : fallbackFilters[schemeState[selected]] || "none";
-  };
-  if (typeof preview.showModal === "function") preview.showModal();
-  else preview.setAttribute("open", "");
+function selectTemplate(index) {
+  activeTemplate = (index + templates.length) % templates.length;
+  updateWorkStage();
 }
 
-function closeWebsite() {
-  if (typeof preview.close === "function") preview.close();
-  else preview.removeAttribute("open");
-  previewFrame.src = "about:blank";
+function openCase(index = activeTemplate) {
+  selectTemplate(index);
+  activeTheme = 0;
+  const template = templates[activeTemplate];
+  document.querySelector("#case-number").textContent = `${String(activeTemplate + 1).padStart(2, "0")} / 07`;
+  document.querySelector("#case-title").textContent = template.name;
+  document.querySelector("#case-external").href = template.url;
+  caseFrame.src = template.url;
+  caseFrame.onload = applyTheme;
+  caseView.classList.add("is-open");
+  caseView.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
-document.querySelector("#view-website").addEventListener("click", openWebsite);
-document.querySelector("#preview-scheme").addEventListener("click", () => nextScheme());
-document.querySelector("#close-preview").addEventListener("click", closeWebsite);
-preview.addEventListener("click", (event) => { if (event.target === preview) closeWebsite(); });
 
-selectWall(0, true);
+function closeCase() {
+  caseView.classList.remove("is-open");
+  caseView.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  setTimeout(() => { if (!caseView.classList.contains("is-open")) caseFrame.src = "about:blank"; }, 360);
+}
+
+navButtons.forEach((button) => button.addEventListener("click", () => showScreen(button.dataset.screen)));
+document.querySelector("#explore-work").addEventListener("click", () => showScreen("work"));
+document.querySelector("#open-info").addEventListener("click", () => showScreen("info"));
+document.querySelector("#info-to-index").addEventListener("click", () => showScreen("index"));
+document.querySelector(".stage-prev").addEventListener("click", () => selectTemplate(activeTemplate - 1));
+document.querySelector(".stage-next").addEventListener("click", () => selectTemplate(activeTemplate + 1));
+document.querySelector(".project-frame-left").addEventListener("click", () => selectTemplate(activeTemplate - 1));
+document.querySelector(".project-frame-right").addEventListener("click", () => selectTemplate(activeTemplate + 1));
+document.querySelector("#open-case-from-work").addEventListener("click", () => openCase());
+document.querySelector("#work-view").addEventListener("click", () => openCase());
+document.querySelectorAll("[data-template]").forEach((button) => button.addEventListener("click", () => openCase(Number(button.dataset.template))));
+document.querySelector(".close-case").addEventListener("click", closeCase);
+document.querySelector("#case-next").addEventListener("click", () => openCase(activeTemplate + 1));
+themeButtons.forEach((button) => button.addEventListener("click", () => { activeTheme = Number(button.dataset.theme); applyTheme(); showNotice(`Theme ${activeTheme + 1} loaded`); }));
+document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
+  const filter = button.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("is-active", item === button));
+  document.querySelectorAll(".template-row").forEach((row) => row.classList.toggle("is-hidden", filter !== "all" && row.dataset.filterGroup !== filter));
+}));
+addEventListener("keydown", (event) => { if (event.key === "Escape" && caseView.classList.contains("is-open")) closeCase(); });
+
+updateWorkStage();
