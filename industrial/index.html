@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A bright concrete gallery where walls, ceiling, and floor become eight live websites." />
-  <title>Z/Archive — Website gallery</title>
+  <meta name="description" content="A seamless searchable grid of eight live website templates." />
+  <title>Z/Archive — Template grid</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=gallery-surfaces-5" />
+  <link rel="stylesheet" href="./styles.css?v=seamless-grid-7" />
 </head>
 <body class="is-loading">
   <div class="loader" id="loader" role="status" aria-label="Preparing the eight-wall showroom">
@@ -19,16 +19,17 @@
 
   <header class="topbar">
     <a class="brand" href="../">Z/<span>ARCHIVE</span></a>
+    <label class="template-search" for="template-search">
+      <span>SEARCH TEMPLATES</span>
+      <input id="template-search" type="search" placeholder="Try roofing, food, barber…" autocomplete="off" />
+      <b id="search-count">08 / 08</b>
+    </label>
     <div class="room-status"><i></i><span id="room-position">WALL 01 / 08</span><strong id="room-name">NAIL SALON</strong></div>
     <div class="top-actions"><a href="../liquid-glass/">LIQUID VIEW</a><a href="../">EXIT ROOM ↗</a></div>
   </header>
 
   <main class="room-app">
-    <section class="room-viewport" id="room-viewport" aria-label="Bright gallery with clickable walls, ceiling, and floor">
-      <div class="architectural-shell" aria-hidden="true">
-        <div class="ceiling-light"></div>
-        <div class="floor-grid"></div>
-      </div>
+    <section class="room-viewport" id="room-viewport" aria-label="Seamless grid of eight clickable website templates">
 
       <div class="room-ring" id="room-ring">
         <article class="website-wall is-active" style="--wall-index:0" data-wall data-title="Nail Salon" data-short="NAILS" data-url="https://zda1-hub.github.io/nail-salon-templates/" data-scheme-count="3">
@@ -74,17 +75,10 @@
 
       </div>
 
-      <div class="room-structure" aria-hidden="true">
-        <i class="gallery-beams"></i>
-        <i class="column column-l1"></i><i class="column column-l2"></i><i class="column column-l3"></i>
-        <i class="column column-r1"></i><i class="column column-r2"></i><i class="column column-r3"></i>
-        <i class="back-header"></i><i class="back-plinth"></i>
-      </div>
-
       <div class="room-core">
-        <span class="core-kicker">GALLERY / 08 WEBSITE SURFACES</span>
+        <span class="core-kicker">ARCHIVE / 08 WEBSITE SURFACES</span>
         <h1>Choose a wall.</h1>
-        <p>Six walls, the ceiling, and the floor are live websites. Click one to enter.</p>
+        <p>Search or click any template to enter its full website.</p>
         <div class="selected-copy"><span>SELECTED WALL</span><strong id="selected-title">Nail Salon</strong><small id="scheme-name">COLOR SCHEME 01 / 03</small></div>
         <div class="core-actions">
           <button class="scheme-button" id="next-scheme" type="button"><span>Change this website</span><strong>NEXT COLOR</strong><b>↻</b></button>
@@ -111,6 +105,6 @@
   </dialog>
 
   <div class="scheme-toast" id="scheme-toast" role="status" aria-live="polite"><i></i><span id="toast-copy">Nail Salon changed to color scheme 02</span></div>
-  <script src="./script.js?v=gallery-surfaces-5"></script>
+  <script src="./script.js?v=seamless-grid-7"></script>
 </body>
 </html>

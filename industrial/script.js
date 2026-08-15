@@ -6,10 +6,13 @@ const roomName = document.querySelector("#room-name");
 const schemeName = document.querySelector("#scheme-name");
 const toast = document.querySelector("#scheme-toast");
 const toastCopy = document.querySelector("#toast-copy");
+const searchInput = document.querySelector("#template-search");
+const searchCount = document.querySelector("#search-count");
 const schemeState = walls.map(() => 0);
 const fallbackFilters = ["none", "hue-rotate(28deg) saturate(1.18)", "hue-rotate(185deg) saturate(.92) contrast(1.08)", "sepia(.42) hue-rotate(345deg) saturate(1.25)"];
 let selected = 0;
 let toastTimer;
+let searchMatches = walls.map((_, index) => index);
 
 function finishLoader() {
   document.querySelector("#loader").classList.add("done");
@@ -109,6 +112,37 @@ function nextScheme(showToast = true) {
     toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
   }
 }
+
+function filterWalls(query) {
+  const normalized = query.trim().toLowerCase();
+  searchMatches = [];
+  walls.forEach((wall, index) => {
+    const searchable = `${wall.dataset.title} ${wall.dataset.short} ${wall.querySelector(".wall-label span").textContent}`.toLowerCase();
+    const matches = !normalized || searchable.includes(normalized);
+    wall.classList.toggle("is-search-miss", !matches);
+    wall.querySelector(".wall-hit").disabled = !matches;
+    navButtons[index].classList.toggle("is-search-miss", !matches);
+    navButtons[index].disabled = !matches;
+    if (matches) searchMatches.push(index);
+  });
+  searchCount.textContent = `${String(searchMatches.length).padStart(2, "0")} / 08`;
+  if (normalized && searchMatches.length) selectWall(searchMatches[0]);
+}
+
+searchInput.addEventListener("input", () => filterWalls(searchInput.value));
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && searchMatches.length) {
+    event.preventDefault();
+    event.stopPropagation();
+    selectWall(searchMatches[0]);
+    openWebsite();
+  }
+  if (event.key === "Escape") {
+    searchInput.value = "";
+    filterWalls("");
+    searchInput.blur();
+  }
+});
 
 walls.forEach((wall, index) => {
   wall.querySelector(".wall-hit").addEventListener("click", () => {
