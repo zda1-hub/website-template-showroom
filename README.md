@@ -1,3 +1,8 @@
 # Website Template Showroom
 
-A concise sales portfolio for seven client-ready business website categories. Each card links to a live GitHub Pages demo and the inquiry flow creates a copyable customization brief.
+An immersive portfolio for seven client-ready business website categories, presented in two distinct directions:
+
+- `industrial/` — a scroll-through brutalist concrete showroom with live display bays
+- `liquid-glass/` — an infinite draggable 3D glass carousel
+
+The root page is a simple experience selector. Both directions include search and full-screen live previews of every GitHub Pages template collection.
