@@ -61,17 +61,48 @@ function showNotice(text) {
   noticeTimer = setTimeout(() => notice.classList.remove("is-visible"), 1900);
 }
 
+const workStage = document.querySelector("#work-stage");
+const coverflowTrack = document.querySelector("#coverflow-track");
+let pointerStartX = 0;
+let pointerDelta = 0;
+let isDraggingFlow = false;
+let suppressFlowClick = false;
+
+function circularOffset(index) {
+  let offset = index - activeTemplate;
+  if (offset > templates.length / 2) offset -= templates.length;
+  if (offset < -templates.length / 2) offset += templates.length;
+  return offset;
+}
+
+function createCoverflowCards() {
+  templates.forEach((template, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "cover-card";
+    card.dataset.template = String(index);
+    card.dataset.label = template.name.toUpperCase();
+    card.style.backgroundImage = template.art;
+    card.setAttribute("aria-label", `View ${template.name}`);
+    card.addEventListener("click", () => {
+      if (suppressFlowClick) return;
+      if (index === activeTemplate) openCase(index);
+      else selectTemplate(index);
+    });
+    coverflowTrack.append(card);
+  });
+}
+
 function updateWorkStage() {
-  const current = templates[activeTemplate];
-  const previous = templates[(activeTemplate + templates.length - 1) % templates.length];
-  const next = templates[(activeTemplate + 1) % templates.length];
-  [[document.querySelector(".project-frame-left"), previous], [document.querySelector(".project-frame-main"), current], [document.querySelector(".project-frame-right"), next]].forEach(([frame, item]) => {
-    frame.style.backgroundImage = item.art;
-    frame.dataset.label = item.name.toUpperCase();
+  [...coverflowTrack.children].forEach((card, index) => {
+    const offset = circularOffset(index);
+    card.dataset.offset = String(offset);
+    card.setAttribute("aria-hidden", String(Math.abs(offset) > 2));
+    card.tabIndex = Math.abs(offset) > 2 ? -1 : 0;
   });
   document.querySelector("#work-count").textContent = `${String(activeTemplate + 1).padStart(2, "0")} / 07`;
-  document.querySelector("#work-category").textContent = current.category;
-  document.querySelector("#work-name").textContent = current.name;
+  document.querySelector("#work-category").textContent = templates[activeTemplate].category;
+  document.querySelector("#work-name").textContent = templates[activeTemplate].name;
 }
 
 function selectTemplate(index) {
@@ -106,9 +137,6 @@ document.querySelector("#open-info").addEventListener("click", () => showScreen(
 document.querySelector("#info-to-index").addEventListener("click", () => showScreen("index"));
 document.querySelector(".stage-prev").addEventListener("click", () => selectTemplate(activeTemplate - 1));
 document.querySelector(".stage-next").addEventListener("click", () => selectTemplate(activeTemplate + 1));
-document.querySelector(".project-frame-left").addEventListener("click", () => selectTemplate(activeTemplate - 1));
-document.querySelector(".project-frame-right").addEventListener("click", () => selectTemplate(activeTemplate + 1));
-document.querySelector("#open-case-from-work").addEventListener("click", () => openCase());
 document.querySelector("#work-view").addEventListener("click", () => openCase());
 document.querySelectorAll("[data-template]").forEach((button) => button.addEventListener("click", () => openCase(Number(button.dataset.template))));
 document.querySelector(".close-case").addEventListener("click", closeCase);
@@ -119,6 +147,40 @@ document.querySelectorAll("[data-filter]").forEach((button) => button.addEventLi
   document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("is-active", item === button));
   document.querySelectorAll(".template-row").forEach((row) => row.classList.toggle("is-hidden", filter !== "all" && row.dataset.filterGroup !== filter));
 }));
-addEventListener("keydown", (event) => { if (event.key === "Escape" && caseView.classList.contains("is-open")) closeCase(); });
+workStage.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+  pointerStartX = event.clientX;
+  pointerDelta = 0;
+  isDraggingFlow = true;
+  workStage.classList.add("is-dragging");
+  workStage.setPointerCapture(event.pointerId);
+});
+workStage.addEventListener("pointermove", (event) => {
+  if (!isDraggingFlow) return;
+  pointerDelta = Math.max(-150, Math.min(150, event.clientX - pointerStartX));
+  workStage.style.setProperty("--drag", `${pointerDelta}px`);
+});
+function finishFlowSwipe(event) {
+  if (!isDraggingFlow) return;
+  isDraggingFlow = false;
+  if (workStage.hasPointerCapture(event.pointerId)) workStage.releasePointerCapture(event.pointerId);
+  const moved = Math.abs(pointerDelta) > 12;
+  suppressFlowClick = moved;
+  if (pointerDelta < -34) selectTemplate(activeTemplate + 1);
+  if (pointerDelta > 34) selectTemplate(activeTemplate - 1);
+  workStage.classList.remove("is-dragging");
+  requestAnimationFrame(() => workStage.style.setProperty("--drag", "0px"));
+  setTimeout(() => { suppressFlowClick = false; }, 40);
+}
+workStage.addEventListener("pointerup", finishFlowSwipe);
+workStage.addEventListener("pointercancel", finishFlowSwipe);
+addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && caseView.classList.contains("is-open")) closeCase();
+  if (!caseView.classList.contains("is-open") && !document.querySelector("#work-screen").hidden) {
+    if (event.key === "ArrowLeft") selectTemplate(activeTemplate - 1);
+    if (event.key === "ArrowRight") selectTemplate(activeTemplate + 1);
+  }
+});
 
+createCoverflowCards();
 updateWorkStage();
