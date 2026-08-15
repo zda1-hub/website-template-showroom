@@ -5,6 +5,9 @@ const loadSteps = [...document.querySelectorAll("[data-load-step]")];
 function finishLoader() {
   loader.classList.add("done");
   body.classList.remove("is-loading");
+  if (location.hash) {
+    requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  }
 }
 
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -60,7 +63,8 @@ chambers.forEach((chamber) => observer.observe(chamber));
 
 function sizeDisplays() {
   document.querySelectorAll(".surface-screen").forEach((screen) => {
-    screen.style.setProperty("--surface-scale", screen.clientWidth / 1440);
+    const coverScale = Math.max(screen.clientWidth / 1440, screen.clientHeight / 900);
+    screen.style.setProperty("--surface-scale", coverScale);
   });
 }
 addEventListener("resize", sizeDisplays);
