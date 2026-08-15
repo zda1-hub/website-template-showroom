@@ -3,133 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Walk through seven business website template collections in an immersive concrete showroom." />
-  <title>Z/Archive — Industrial showroom</title>
+  <meta name="description" content="An eight-wall digital room for exploring seven business website collections without scrolling." />
+  <title>Z/Archive — Eight-wall showroom</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body class="is-loading">
-  <div class="loader" id="loader" role="status" aria-label="Preparing the industrial showroom">
-    <div class="loader-bg"></div>
-    <a class="loader-mark" href="../">Z/ARCHIVE</a>
-    <div class="loader-center">
-      <p>ROOM 01 / BUILD STATE</p>
-      <h1>Preparing your<br>showroom.</h1>
-      <ol>
-        <li data-load-step="0"><i></i><span>Building context</span><b>01</b></li>
-        <li data-load-step="1"><i></i><span>Setting the room</span><b>02</b></li>
-        <li data-load-step="2"><i></i><span>Mounting live sites</span><b>03</b></li>
-      </ol>
-    </div>
-    <button id="skip-loader" type="button">Skip intro ↗</button>
+  <div class="loader" id="loader" role="status" aria-label="Preparing the eight-wall showroom">
+    <div class="loader-room" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p>ASSEMBLING ROOM <span id="loader-count">01</span> / 08</p>
+    <button id="skip-loader" type="button">Enter now ↗</button>
   </div>
 
-  <header class="control-bar">
+  <header class="topbar">
     <a class="brand" href="../">Z/<span>ARCHIVE</span></a>
-    <label class="search"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="SEARCH NAILS, HVAC, FOOD…" aria-label="Search template rooms"></label>
-    <div class="control-meta"><span id="room-count">07 SURFACES</span><a href="../liquid-glass/">LIQUID VIEW ↗</a></div>
+    <div class="room-status"><i></i><span id="room-position">WALL 01 / 08</span><strong id="room-name">NAIL SALON</strong></div>
+    <div class="top-actions"><a href="../liquid-glass/">LIQUID VIEW</a><a href="../">EXIT ROOM ↗</a></div>
   </header>
 
-  <div class="palette-dock">
-    <button class="theme-control" id="theme-next" type="button" aria-label="Change showroom color palette">
-      <span class="palette-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span class="palette-copy"><small>CHANGE PALETTE</small><strong id="theme-name">CONCRETE</strong></span>
-      <b>→</b>
-    </button>
-  </div>
+  <main class="room-app">
+    <section class="room-viewport" id="room-viewport" aria-label="Eight-sided template room">
+      <div class="ceiling-plane" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="floor-plane" aria-hidden="true"><span>08 SURFACES · 07 INDUSTRIES · 21 DIRECTIONS</span></div>
 
-  <aside class="rail" aria-label="Showroom position">
-    <span>ENTRY</span><div class="rail-line"><i id="scroll-progress"></i></div><span>07</span>
-  </aside>
-
-  <main>
-    <section class="threshold" id="top">
-      <div class="threshold-bg"></div>
-      <div class="threshold-copy">
-        <p class="eyebrow">Digital showroom / room 01</p>
-        <h1>Walk the<br><em>archive.</em></h1>
-        <p>Seven industries. Twenty-one directions. Scroll forward, search by business type, then enter any display for the full website.</p>
-        <a href="#room-nail">Begin walkthrough <span>↓</span></a>
+      <div class="room-ring" id="room-ring">
+        <article class="website-wall is-active" style="--wall-index:0" data-wall data-title="Nail Salon" data-short="NAILS" data-url="https://zda1-hub.github.io/nail-salon-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/nail-salon-templates/" title="Nail salon website wall" loading="eager" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>01 / BEAUTY</span><strong>Nail Salon</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Nail Salon wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:1" data-wall data-title="Barber Shop" data-short="BARBER" data-url="https://zda1-hub.github.io/barber-shop-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/barber-shop-templates/" title="Barber shop website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>02 / GROOMING</span><strong>Barber Shop</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Barber Shop wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:2" data-wall data-title="Mechanic" data-short="AUTO" data-url="https://zda1-hub.github.io/mechanic-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/mechanic-templates/" title="Mechanic website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>03 / AUTOMOTIVE</span><strong>Mechanic</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Mechanic wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:3" data-wall data-title="HVAC" data-short="HVAC" data-url="https://zda1-hub.github.io/hvac-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/hvac-templates/" title="HVAC website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>04 / HOME SERVICE</span><strong>HVAC</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select HVAC wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:4" data-wall data-title="Roofing" data-short="ROOFING" data-url="https://zda1-hub.github.io/roofing-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/roofing-templates/" title="Roofing website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>05 / CONTRACTOR</span><strong>Roofing</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Roofing wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:5" data-wall data-title="Custom Goods" data-short="GOODS" data-url="https://zda1-hub.github.io/clothing-custom-goods-templates/" data-scheme-count="4" data-custom-colors="true">
+          <iframe src="https://zda1-hub.github.io/clothing-custom-goods-templates/" title="Custom goods website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>06 / COMMERCE</span><strong>Custom Goods</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Custom Goods wall"></button>
+        </article>
+        <article class="website-wall" style="--wall-index:6" data-wall data-title="Restaurant" data-short="FOOD" data-url="https://zda1-hub.github.io/restaurant-templates/" data-scheme-count="3">
+          <iframe src="https://zda1-hub.github.io/restaurant-templates/" title="Restaurant website wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>07 / HOSPITALITY</span><strong>Restaurant</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Restaurant wall"></button>
+        </article>
+        <article class="website-wall archive-wall" style="--wall-index:7" data-wall data-title="Experience Selector" data-short="HOME" data-url="https://zda1-hub.github.io/website-template-showroom/" data-scheme-count="3" data-room-colors="true">
+          <iframe src="https://zda1-hub.github.io/website-template-showroom/" title="Showroom experience selector wall" loading="lazy" tabindex="-1"></iframe>
+          <div class="wall-shade"></div><div class="wall-label"><span>08 / ARCHIVE</span><strong>Experience Selector</strong><small>Click to select wall</small></div>
+          <button class="wall-hit" type="button" aria-label="Select Experience Selector wall"></button>
+        </article>
       </div>
-      <div class="room-spec"><span>CONCRETE / 01</span><span>PHX · 2026</span></div>
+
+      <button class="rotate rotate-left" id="previous-wall" type="button" aria-label="Previous wall">←</button>
+      <button class="rotate rotate-right" id="next-wall" type="button" aria-label="Next wall">→</button>
+      <p class="drag-note">DRAG THE ROOM · OR CHOOSE A WALL BELOW</p>
     </section>
 
-    <section class="corridor" id="rooms" aria-label="Template wall gallery">
-      <article class="chamber" data-chamber>
-        <div class="chamber-id"><span>CHAMBER</span><strong>01</strong></div>
-        <section class="surface surface-left" id="room-nail" data-room data-search="nail salon beauty appointments manicure pedicure booking">
-          <div class="surface-label"><span>01 / BEAUTY</span><strong>Nail Salon</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/nail-salon-templates/" title="Nail salon template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Nail Salon" data-url="https://zda1-hub.github.io/nail-salon-templates/">View website ↗</button>
-        </section>
-        <section class="surface surface-center" id="room-barber" data-room data-search="barber shop haircut grooming appointments booking">
-          <div class="surface-label"><span>02 / GROOMING</span><strong>Barber Shop</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/barber-shop-templates/" title="Barber shop template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Barber Shop" data-url="https://zda1-hub.github.io/barber-shop-templates/">View website ↗</button>
-        </section>
-        <section class="surface surface-right" id="room-mechanic" data-room data-search="mechanic auto automotive repair garage service car appointment">
-          <div class="surface-label"><span>03 / AUTOMOTIVE</span><strong>Mechanic</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/mechanic-templates/" title="Mechanic template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Mechanic" data-url="https://zda1-hub.github.io/mechanic-templates/">View website ↗</button>
-        </section>
-        <div class="floor-mark">SCROLL TO CHAMBER 02 ↓</div>
-      </article>
-
-      <article class="chamber" data-chamber>
-        <div class="chamber-id"><span>CHAMBER</span><strong>02</strong></div>
-        <section class="surface surface-left" id="room-hvac" data-room data-search="hvac heating cooling air conditioning emergency home service quote">
-          <div class="surface-label"><span>04 / HOME SERVICE</span><strong>HVAC</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/hvac-templates/" title="HVAC template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="HVAC" data-url="https://zda1-hub.github.io/hvac-templates/">View website ↗</button>
-        </section>
-        <section class="surface surface-center" id="room-roofing" data-room data-search="roofing roofer roof contractor inspection estimate quote home service">
-          <div class="surface-label"><span>05 / CONTRACTOR</span><strong>Roofing</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/roofing-templates/" title="Roofing template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Roofing" data-url="https://zda1-hub.github.io/roofing-templates/">View website ↗</button>
-        </section>
-        <section class="surface surface-right" id="room-goods" data-room data-search="clothing apparel custom goods bags hats embroidery printing ecommerce orders">
-          <div class="surface-label"><span>06 / COMMERCE</span><strong>Custom Goods</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/clothing-custom-goods-templates/" title="Clothing and custom goods template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Clothing / Custom Goods" data-url="https://zda1-hub.github.io/clothing-custom-goods-templates/">View website ↗</button>
-        </section>
-        <div class="floor-mark">SCROLL TO CHAMBER 03 ↓</div>
-      </article>
-
-      <article class="chamber final-chamber" data-chamber>
-        <div class="chamber-id"><span>CHAMBER</span><strong>03</strong></div>
-        <div class="archive-wall archive-wall-left"><span>21</span><p>Design directions<br>inside the archive.</p></div>
-        <section class="surface surface-center feature-surface" id="room-food" data-room data-search="restaurant food dining cafe menu reservation table hospitality">
-          <div class="surface-label"><span>07 / HOSPITALITY</span><strong>Food & Restaurant</strong></div>
-          <div class="surface-screen"><iframe src="https://zda1-hub.github.io/restaurant-templates/" title="Restaurant template preview" loading="lazy" tabindex="-1"></iframe></div>
-          <button data-open data-title="Food / Restaurant" data-url="https://zda1-hub.github.io/restaurant-templates/">View website ↗</button>
-        </section>
-        <div class="archive-wall archive-wall-right"><span>07</span><p>Business categories.<br>One clear next action.</p></div>
-        <div class="floor-mark">END OF WALL ARCHIVE ↓</div>
-      </article>
-
-      <div class="no-results" id="no-results"><p>NO SURFACE FOUND</p><button id="clear-search" type="button">Clear search ↗</button></div>
+    <section class="wall-controls" aria-label="Selected wall controls">
+      <div class="selected-copy"><span>SELECTED WALL</span><strong id="selected-title">Nail Salon</strong><small id="scheme-name">COLOR SCHEME 01 / 03</small></div>
+      <button class="scheme-button" id="next-scheme" type="button"><span>Change selected website</span><strong>NEXT COLOR SCHEME</strong><b>↻</b></button>
+      <button class="view-button" id="view-website" type="button"><span>Enter selected wall</span><strong>VIEW WEBSITE</strong><b>↗</b></button>
     </section>
 
-    <section class="exit-room">
-      <p>Need something that is not in the archive?</p>
-      <h2>Make the next<br>room <em>yours.</em></h2>
-      <button id="copy-brief" type="button">Copy a project request ↗</button>
-      <p class="copy-note" id="copy-note">Copy the request, then send it by email or DM.</p>
-      <span>END OF ARCHIVE / RETURN TO <a href="../">VIEW SELECTOR</a></span>
-    </section>
+    <nav class="wall-map" aria-label="Choose a website wall">
+      <button class="active" data-wall-nav="0" type="button"><span>01</span>NAILS</button>
+      <button data-wall-nav="1" type="button"><span>02</span>BARBER</button>
+      <button data-wall-nav="2" type="button"><span>03</span>AUTO</button>
+      <button data-wall-nav="3" type="button"><span>04</span>HVAC</button>
+      <button data-wall-nav="4" type="button"><span>05</span>ROOFING</button>
+      <button data-wall-nav="5" type="button"><span>06</span>GOODS</button>
+      <button data-wall-nav="6" type="button"><span>07</span>FOOD</button>
+      <button data-wall-nav="7" type="button"><span>08</span>HOME</button>
+    </nav>
   </main>
 
   <dialog class="preview" id="preview">
-    <div class="preview-bar"><div><span>LIVE SITE /</span><strong id="preview-title">Template</strong></div><a id="external-link" href="#" target="_blank" rel="noreferrer">Open in new tab ↗</a><button id="close-preview" type="button" aria-label="Close preview">Close ×</button></div>
+    <header><div><span>SELECTED WEBSITE /</span><strong id="preview-title">Nail Salon</strong></div><button id="preview-scheme" type="button">Next color scheme ↻</button><a id="external-link" href="#" target="_blank" rel="noreferrer">Open in new tab ↗</a><button id="close-preview" type="button">Return to room ×</button></header>
     <iframe id="preview-frame" title="Full website preview"></iframe>
   </dialog>
-  <div class="theme-toast" id="theme-toast" role="status" aria-live="polite">
-    <div><i></i><span>Changed theme to <strong id="toast-theme">Concrete</strong></span></div>
-    <button id="toast-next" type="button">Next theme →</button>
-  </div>
-  <div class="noise" aria-hidden="true"></div>
+
+  <div class="scheme-toast" id="scheme-toast" role="status" aria-live="polite"><i></i><span id="toast-copy">Nail Salon changed to color scheme 02</span></div>
   <script src="./script.js"></script>
 </body>
 </html>
