@@ -3,39 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Seven website templates, each with three live visual directions." />
-  <title>Z/Showroom — Website Templates</title>
+  <meta name="description" content="A placeholder portfolio for a designer and developer." />
+  <title>Your Name — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=coverflow-swipe-1" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=portfolio-placeholder-1" />
 </head>
 <body>
-  <main class="showroom" id="showroom">
-    <header class="site-header">
-      <a class="wordmark" href="../" aria-label="Return to showroom home">Z/SHOWROOM</a>
-      <p>07 live templates / 21 directions</p>
-      <button class="round-button" id="open-info" type="button" aria-label="Show information"><span></span><i></i><i></i></button>
-    </header>
-    <section class="screen screen-home is-active" id="home-screen" aria-labelledby="home-title">
-      <div class="home-copy"><p class="eyebrow">WEB DESIGN / CLIENT PREVIEWS</p><h1 id="home-title">Choose a website<br>that feels like <em>them.</em></h1><p class="home-description">Seven ready-to-show business websites. Open a category, then switch between its three visual directions live.</p><button class="text-action" id="explore-work" type="button">Explore the templates <b>↘</b></button></div>
-      <div class="home-orbit" aria-hidden="true"><span class="orbit-card card-a">NAILS</span><span class="orbit-card card-b">AUTO</span><span class="orbit-card card-c">FOOD</span><span class="orbit-card card-d">GOODS</span><strong>07</strong></div>
+  <nav class="site-nav" aria-label="Portfolio sections">
+    <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#photography">Photography</a>
+  </nav>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme"><span aria-hidden="true">◐</span><b id="theme-label">Dark</b></button>
+
+  <main class="portfolio">
+    <article class="intro" id="about">
+      <button class="avatar" id="avatar-toggle" type="button" aria-label="Toggle profile artwork"><span>YN</span><i></i></button>
+      <h1>YOUR NAME</h1>
+      <p class="role">Designer &amp; developer</p>
+      <p>I help independent brands and growing businesses look sharp online, turn visits into bookings, and make their service easy to understand.</p>
+      <p>My work blends strategy, visual direction, and code—from first concept to a real site people can use. This is placeholder copy you can replace with your own story.</p>
+      <p class="availability">Available for select web projects.</p>
+      <div class="intro-actions"><button class="copy-button" id="copy-email" type="button">Copy email</button><a href="mailto:hello@yourdomain.com">Start a project ↗</a></div>
+    </article>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <header class="section-header"><h2 id="work-title">Work</h2><span>Selected template directions</span></header>
+      <div class="project-list">
+        <article class="project"><div class="project-copy"><p>2026 — Now</p><h3>Beauty Booking</h3><p>A polished, appointment-first nail salon site with a clear service menu and booking route.</p></div><button class="preview-button" type="button" data-project="beauty" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-beauty" id="preview-beauty" hidden><div class="mock-nav"><span>THE STUDIO</span><span>BOOK NOW</span></div><strong>Make time<br>for yourself.</strong><small>Beauty / appointment placeholder</small></div></article>
+        <article class="project"><div class="project-copy"><p>2026 — Now</p><h3>Local Trade</h3><p>A direct home-service website built around fast estimates, trust, and emergency calls.</p></div><button class="preview-button" type="button" data-project="trade" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-trade" id="preview-trade" hidden><div class="mock-nav"><span>ARROW HVAC</span><span>GET HELP</span></div><strong>Comfort,<br>handled.</strong><small>Home service placeholder</small></div></article>
+        <article class="project"><div class="project-copy"><p>2025 — Now</p><h3>Custom Goods</h3><p>A product-led storefront for custom clothing, bags, hats, and everyday objects.</p></div><button class="preview-button" type="button" data-project="goods" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-goods" id="preview-goods" hidden><div class="mock-nav"><span>COMMON FORM</span><span>SHOP</span></div><strong>Made for<br>the everyday.</strong><small>Commerce placeholder</small></div></article>
+      </div>
+      <a class="all-work" href="#experience">More work coming soon <span>→</span></a>
     </section>
-    <section class="screen screen-work" id="work-screen" aria-labelledby="work-title" hidden>
-      <div class="section-heading"><p class="eyebrow">SELECTED WORK / <span id="work-count">01 / 07</span></p><h2 id="work-title">Ready to<br><em>show.</em></h2></div>
-      <div class="work-stage" id="work-stage" aria-label="Swipe through website templates"><div class="coverflow-track" id="coverflow-track"></div><button class="stage-arrow stage-prev" type="button" aria-label="Previous template">←</button><button class="stage-arrow stage-next" type="button" aria-label="Next template">→</button></div>
-      <div class="work-meta"><p id="work-category">BEAUTY / APPOINTMENTS</p><h3 id="work-name">Nail Salon</h3><button id="work-view" type="button">VIEW TEMPLATE <b>↗</b></button></div>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <header class="section-header"><h2 id="experience-title">Experience</h2><span>Placeholder timeline</span></header>
+      <ol class="timeline">
+        <li><time>2026 — Now</time><p><strong>Independent designer / developer</strong> for local businesses and brands.</p><small>Phoenix, AZ</small></li>
+        <li><time>2024 — 2026</time><p><strong>Digital designer</strong> creating sites, identities, and online stores.</p><small>Remote</small></li>
+        <li><time>2022 — 2024</time><p><strong>Creative generalist</strong> working across strategy, visuals, and front-end builds.</p><small>Replace this</small></li>
+      </ol>
     </section>
-    <section class="screen screen-index" id="index-screen" aria-labelledby="index-title" hidden>
-      <div class="index-top"><p class="eyebrow">TEMPLATE INDEX</p><h2 id="index-title">Find the<br><em>right fit.</em></h2></div>
-      <div class="filters" role="group" aria-label="Filter template categories"><button class="is-active" data-filter="all" type="button">All <span>(07)</span></button><button data-filter="beauty" type="button">Beauty <span>(02)</span></button><button data-filter="auto" type="button">Auto <span>(01)</span></button><button data-filter="home" type="button">Home <span>(02)</span></button><button data-filter="commerce" type="button">Commerce <span>(01)</span></button><button data-filter="food" type="button">Food <span>(01)</span></button></div>
-      <div class="template-table" role="list" aria-label="Template collection"><div class="table-head" aria-hidden="true"><span>No.</span><span>Template</span><span>Business</span><span>Directions</span></div><button class="template-row" data-template="0" data-filter-group="beauty" type="button"><span>01</span><strong>Nail Salon</strong><small>Beauty / appointments</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="1" data-filter-group="beauty" type="button"><span>02</span><strong>Barber Shop</strong><small>Grooming / bookings</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="2" data-filter-group="auto" type="button"><span>03</span><strong>Mechanic</strong><small>Auto / repair</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="3" data-filter-group="home" type="button"><span>04</span><strong>HVAC</strong><small>Home / service</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="4" data-filter-group="home" type="button"><span>05</span><strong>Roofing</strong><small>Home / contractor</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="5" data-filter-group="commerce" type="button"><span>06</span><strong>Custom Goods</strong><small>Clothing / bags / hats</small><em>03 <b>↗</b></em></button><button class="template-row" data-template="6" data-filter-group="food" type="button"><span>07</span><strong>Restaurant</strong><small>Food / reservations</small><em>03 <b>↗</b></em></button></div>
+
+    <section class="section" id="photography" aria-labelledby="photo-title">
+      <header class="section-header"><h2 id="photo-title">Photography</h2><span>Placeholder image study</span></header>
+      <div class="photo-grid" aria-label="Placeholder photography grid"><figure class="photo photo-one"><figcaption>01 / after hours</figcaption></figure><figure class="photo photo-two"><figcaption>02 / warm light</figcaption></figure><figure class="photo photo-three"><figcaption>03 / object study</figcaption></figure><figure class="photo photo-four"><figcaption>04 / soft geometry</figcaption></figure><figure class="photo photo-five"><figcaption>05 / city texture</figcaption></figure><figure class="photo photo-six"><figcaption>06 / open space</figcaption></figure></div>
     </section>
-    <section class="screen screen-info" id="info-screen" aria-labelledby="info-title" hidden><div class="info-copy"><p class="eyebrow">ABOUT THIS COLLECTION</p><h2 id="info-title">Built to make<br>the <em>choice easy.</em></h2><p>Every template is a short, conversion-focused site with a clear booking, quote, reservation, or shop action. Each category has three design directions so you can compare the tone before a custom build.</p><button class="text-action" id="info-to-index" type="button">Browse all templates <b>↘</b></button></div></section>
-    <nav class="site-nav" aria-label="Showroom navigation"><button class="nav-item is-active" data-screen="home" type="button">Z/SHOWROOM</button><button class="nav-item" data-screen="work" type="button">Work</button><button class="nav-item" data-screen="index" type="button">Index</button><button class="nav-item" data-screen="info" type="button">Information</button></nav>
+
+    <section class="section toolbox" aria-labelledby="toolbox-title"><header class="section-header"><h2 id="toolbox-title">Toolbox</h2><span>What I use to build</span></header><div class="tool-list"><span>Figma</span><span>Framer</span><span>GitHub</span><span>HTML / CSS</span><span>JavaScript</span><span>Shopify</span><span>Webflow</span><span>Notion</span></div></section>
   </main>
-  <section class="case-view" id="case-view" aria-hidden="true"><header class="case-header"><button class="round-button close-case" type="button" aria-label="Return to templates">×</button><div><p id="case-number">01 / 07</p><h2 id="case-title">Nail Salon</h2></div><a id="case-external" href="#" target="_blank" rel="noreferrer">OPEN LIVE SITE ↗</a></header><div class="case-stage"><div class="case-shadow"></div><iframe id="case-frame" title="Website template preview"></iframe></div><aside class="theme-panel" aria-label="Choose a template theme"><p>THEME</p><div class="theme-options" role="group" aria-label="Theme directions"><button class="is-active" data-theme="0" type="button"><span>01</span><strong>Editorial</strong></button><button data-theme="1" type="button"><span>02</span><strong>Bold</strong></button><button data-theme="2" type="button"><span>03</span><strong>Warm</strong></button></div><p class="theme-note" id="theme-note">THEME 01 LOADED</p></aside><button class="case-next" id="case-next" type="button">NEXT TEMPLATE <b>→</b></button></section>
-  <div class="notice" id="notice" role="status" aria-live="polite">Theme changed</div>
-  <script src="./script.js?v=coverflow-swipe-1"></script>
+  <footer><p><span id="local-time">Loading local time</span><i>•</i> <span>Built for your next client</span></p><a href="#about">Back to top ↑</a></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./script.js?v=portfolio-placeholder-1"></script>
 </body>
 </html>
