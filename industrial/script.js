@@ -21,9 +21,9 @@ const previews = {
 
 function getTheme() { return localStorage.getItem('portfolio-theme') || 'system'; }
 function applyTheme(theme) {
-  document.documentElement.toggleAttribute('data-theme', theme !== 'system');
-  if (theme !== 'system') document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.theme = theme;
   themeToggle.textContent = `Theme: ${theme}`;
+  themeToggle.setAttribute('aria-label', `Theme: ${theme}`);
   localStorage.setItem('portfolio-theme', theme);
 }
 function announce(message) {
@@ -74,7 +74,7 @@ function updateLocalTime() {
   const parts = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Phoenix' }).format(now).toLowerCase();
   const hour = Number(new Intl.DateTimeFormat('en-US', { hour: 'numeric', hourCycle: 'h23', timeZone: 'America/Phoenix' }).format(now));
   const working = hour >= 8 && hour < 18;
-  localTime.textContent = `${parts} in Phoenix, Arizona`;
+  localTime.textContent = `${parts} in Tucson, Arizona`;
   workStatus.classList.toggle('is-working', working);
   workStatus.classList.toggle('is-sleeping', !working);
   workStatus.setAttribute('aria-label', working ? 'Working' : 'Sleeping');
