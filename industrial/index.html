@@ -3,81 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="An editable personal portfolio with selected web work." />
-  <title>Your Name — Selected Work</title>
+  <meta name="description" content="Your Name — independent designer and developer." />
+  <title>Your Name — Designer &amp; Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=work-list-1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=portfolio-replica-1" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="wordmark" href="#about">YOUR NAME</a>
-    <nav aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="theme-button" id="theme-button" type="button" aria-live="polite">Theme: system</button>
-  </header>
-
-  <main>
-    <section class="intro" id="about" aria-labelledby="intro-title">
-      <p class="eyebrow">INDEPENDENT CREATIVE / [YOUR CITY]</p>
-      <h1 id="intro-title">I build clear, considered websites for people with something to show.</h1>
-      <p class="intro-copy">This is your space for a quick introduction—what you do, who you work with, and the kind of work you want more of. Replace every bit of placeholder text with your own.</p>
-      <div class="intro-links">
-        <button class="text-button" id="copy-email" type="button">Copy email</button>
-        <a href="mailto:hello@yourdomain.com">hello@yourdomain.com ↗</a>
-      </div>
+  <nav class="social-links" aria-label="Social links">
+    <a href="#contact" aria-label="X profile">X</a>
+    <a href="#contact" aria-label="LinkedIn profile">in</a>
+    <a href="#contact" aria-label="GitHub profile">gh</a>
+  </nav>
+  <main class="article">
+    <section id="about" class="intro" aria-labelledby="name">
+      <button class="portrait" id="portrait-toggle" type="button" aria-label="Show profile artwork">
+        <span>YN</span><i aria-hidden="true"></i>
+      </button>
+      <h1 id="name">Your Name</h1>
+      <p class="role">Independent designer &amp; developer</p>
+      <p>I make simple, useful websites for independent businesses and people with good work to show.</p>
+      <p>My process combines clear thinking, visual direction, and front-end code—from the first idea to a website that is ready for customers.</p>
+      <p>Available for select web projects.</p>
+      <p class="contact-actions"><button id="copy-email" type="button">Copy email</button><a href="mailto:hello@yourdomain.com">Let’s work together</a></p>
     </section>
 
-    <section class="work-section" id="work" aria-labelledby="work-heading">
+    <section id="projects" class="section work" aria-labelledby="work-heading">
       <h2 id="work-heading">Work</h2>
-      <div class="work-list">
-        <article class="work-item">
-          <p class="work-date">2026 — Now</p>
-          <div class="work-content">
-            <a class="project-name" href="https://chiaraelaine.com/" target="_blank" rel="noreferrer">Chiara Elaine</a>
-            <p class="project-description">A fashion styling and creative portfolio centered on visual storytelling, wardrobe, and brand communication.</p>
-            <a class="site-preview chiara-preview" href="https://chiaraelaine.com/" target="_blank" rel="noreferrer" aria-label="View Chiara Elaine's website in a new tab">
-              <img src="https://chiaraelaine.com/ct-logos/ct-share.png" alt="Preview image from Chiara Elaine's website" />
-              <span>View live website <b>↗</b></span>
-            </a>
+      <ol class="work-list">
+        <li class="work-item">
+          <time>2026 — Now</time>
+          <div>
+            <a class="project-link" href="https://chiaraelaine.com/" target="_blank" rel="noreferrer">Chiara Elaine</a>
+            <p>A fashion styling and creative portfolio centered on visual storytelling, wardrobe, and brand communication.</p>
+            <button class="preview-trigger" type="button" data-preview="chiara" aria-haspopup="dialog">Open preview of Chiara Elaine</button>
           </div>
-        </article>
+        </li>
+        <li class="work-item">
+          <time>2026 — Now</time>
+          <div>
+            <a class="project-link" href="https://www.beverlycorpuz.com/" target="_blank" rel="noreferrer">Beverly Corpuz</a>
+            <p>A visual artist’s portfolio for creative work, moving image, and everyday observations.</p>
+            <button class="preview-trigger" type="button" data-preview="beverly" aria-haspopup="dialog">Open preview of Beverly Corpuz</button>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-        <article class="work-item">
-          <p class="work-date">2026 — Now</p>
-          <div class="work-content">
-            <a class="project-name" href="https://www.beverlycorpuz.com/" target="_blank" rel="noreferrer">Beverly Corpuz</a>
-            <p class="project-description">A visual artist's portfolio for creative work, moving image, and everyday observations.</p>
-            <a class="site-preview" href="https://www.beverlycorpuz.com/" target="_blank" rel="noreferrer" aria-label="View Beverly Corpuz's website in a new tab">
-              <img src="https://image.thum.io/get/width/1000/crop/660/https://www.beverlycorpuz.com/" alt="Screenshot preview of Beverly Corpuz's website" />
-              <span>View live website <b>↗</b></span>
-            </a>
-          </div>
-        </article>
+    <section id="experience" class="section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ol class="timeline">
+        <li><time>2026 — Now</time><p>Independent designer &amp; developer</p><small>[Your city]</small></li>
+        <li><time>2024 — 2026</time><p>Digital designer for local businesses and growing brands</p><small>Remote</small></li>
+        <li><time>2022 — 2024</time><p>Creative generalist across web, identity, and product work</p><small>Replace this</small></li>
+      </ol>
+    </section>
+
+    <section class="section thoughts" aria-labelledby="thoughts-heading">
+      <h2 id="thoughts-heading">Thoughts</h2>
+      <ol class="thought-list"><li><time>2026</time><a href="#contact">Make the useful thing first</a></li></ol>
+    </section>
+
+    <section id="photography" class="section photography" aria-labelledby="photography-heading">
+      <h2 id="photography-heading">Photography</h2>
+      <div class="photo-note"><time>2026</time><p>Personal studies in light, texture, and ordinary places.<br />[Your city]</p></div>
+      <div class="photo-strip" aria-label="Placeholder photography studies">
+        <figure class="photo photo-one"><span>01</span></figure>
+        <figure class="photo photo-two"><span>02</span></figure>
+        <figure class="photo photo-three"><span>03</span></figure>
+        <figure class="photo photo-four"><span>04</span></figure>
+        <figure class="photo photo-five"><span>05</span></figure>
       </div>
     </section>
 
-    <section class="notes-section" aria-labelledby="notes-heading">
-      <h2 id="notes-heading">Notes</h2>
-      <p>Use this space for a short thought, a client note, or whatever you want people to know before they reach out.</p>
-    </section>
-
-    <section class="contact-section" id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Let’s make something useful.</h2>
-      <a href="mailto:hello@yourdomain.com">hello@yourdomain.com ↗</a>
+    <section class="section toolbox" aria-labelledby="toolbox-heading">
+      <h2 id="toolbox-heading">Toolbox</h2>
+      <div class="tool-row"><span>Curated finds</span><a href="#contact">What shapes how I think and build</a></div>
+      <div class="tool-row"><span>Stack</span><p>Figma&nbsp;&nbsp; GitHub&nbsp;&nbsp; HTML/CSS&nbsp;&nbsp; JavaScript&nbsp;&nbsp; Notion</p></div>
     </section>
   </main>
 
-  <footer>
-    <span id="local-time">Loading local time</span>
-    <span>© <span id="year"></span> YOUR NAME</span>
-  </footer>
+  <footer class="site-footer"><p><span id="local-time">Loading local time</span><span class="sleep" aria-hidden="true">☁</span></p></footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./script.js?v=work-list-1"></script>
+  <nav class="dock" aria-label="Site">
+    <div class="dock-pill"><a href="#about">About</a><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#photography">Photography</a></div>
+    <button class="dock-icon" id="back-to-top" type="button" aria-label="Back to top">↑</button>
+    <button class="dock-icon theme-control" id="theme-toggle" type="button">Theme: system</button>
+  </nav>
+
+  <dialog class="preview-dialog" id="preview-dialog" aria-labelledby="preview-title">
+    <div class="preview-head"><p id="preview-title">Site preview</p><button id="close-preview" type="button" aria-label="Close preview">×</button></div>
+    <a id="preview-link" class="preview-window" href="#" target="_blank" rel="noreferrer">
+      <img id="preview-image" src="" alt="" />
+      <span>View live website ↗</span>
+    </a>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./script.js?v=portfolio-replica-1"></script>
 </body>
 </html>
