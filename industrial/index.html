@@ -8,25 +8,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=portfolio-replica-1" />
+  <link rel="stylesheet" href="./styles.css?v=portfolio-replica-2" />
 </head>
 <body>
   <nav class="social-links" aria-label="Social links">
-    <a href="#contact" aria-label="X profile">X</a>
-    <a href="#contact" aria-label="LinkedIn profile">in</a>
-    <a href="#contact" aria-label="GitHub profile">gh</a>
+    <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="Open LinkedIn"><span aria-hidden="true">in</span></a>
+    <a href="https://github.com/zda1-hub" target="_blank" rel="noreferrer" aria-label="Open GitHub"><span aria-hidden="true">gh</span></a>
   </nav>
   <main class="article">
     <section id="about" class="intro" aria-labelledby="name">
-      <button class="portrait" id="portrait-toggle" type="button" aria-label="Show profile artwork">
-        <span>YN</span><i aria-hidden="true"></i>
-      </button>
+      <a class="brand-logo" href="#about" aria-label="Kaimaz home"><img src="./assets/kaimaz-logo.jpg" alt="Kaimaz" /></a>
       <h1 id="name">Your Name</h1>
       <p class="role">Independent designer &amp; developer</p>
       <p>I make simple, useful websites for independent businesses and people with good work to show.</p>
       <p>My process combines clear thinking, visual direction, and front-end code—from the first idea to a website that is ready for customers.</p>
       <p>Available for select web projects.</p>
-      <p class="contact-actions"><button id="copy-email" type="button">Copy email</button><a href="mailto:hello@yourdomain.com">Let’s work together</a></p>
+      <p class="contact-actions"><button id="copy-email" type="button">Copy email</button><a href="mailto:zakai@kaimaz.com">Let’s work together</a></p>
     </section>
 
     <section id="projects" class="section work" aria-labelledby="work-heading">
@@ -62,29 +59,29 @@
 
     <section class="section thoughts" aria-labelledby="thoughts-heading">
       <h2 id="thoughts-heading">Thoughts</h2>
-      <ol class="thought-list"><li><time>2026</time><a href="#contact">Make the useful thing first</a></li></ol>
+      <ol class="thought-list"><li><time>2026</time><a href="mailto:zakai@kaimaz.com">Make the useful thing first</a></li></ol>
     </section>
 
     <section id="photography" class="section photography" aria-labelledby="photography-heading">
       <h2 id="photography-heading">Photography</h2>
       <div class="photo-note"><time>2026</time><p>Personal studies in light, texture, and ordinary places.<br />[Your city]</p></div>
-      <div class="photo-strip" aria-label="Placeholder photography studies">
-        <figure class="photo photo-one"><span>01</span></figure>
-        <figure class="photo photo-two"><span>02</span></figure>
-        <figure class="photo photo-three"><span>03</span></figure>
-        <figure class="photo photo-four"><span>04</span></figure>
-        <figure class="photo photo-five"><span>05</span></figure>
+      <div class="photo-strip" aria-label="Photography studies">
+        <figure class="photo"><img src="./assets/photo-church.jpg" alt="Church tower at dusk" /><span>01</span></figure>
+        <figure class="photo"><img src="./assets/photo-branches.jpg" alt="Tree branches over water" /><span>02</span></figure>
+        <figure class="photo"><img src="./assets/photo-forest.jpg" alt="Forest trail in dappled light" /><span>03</span></figure>
+        <figure class="photo"><img src="./assets/photo-garden.jpg" alt="Garden viewed from a wooden pavilion" /><span>04</span></figure>
+        <figure class="photo"><img src="./assets/photo-trees.jpg" alt="Evergreen trees and bright leaves" /><span>05</span></figure>
       </div>
     </section>
 
     <section class="section toolbox" aria-labelledby="toolbox-heading">
       <h2 id="toolbox-heading">Toolbox</h2>
-      <div class="tool-row"><span>Curated finds</span><a href="#contact">What shapes how I think and build</a></div>
-      <div class="tool-row"><span>Stack</span><p>Figma&nbsp;&nbsp; GitHub&nbsp;&nbsp; HTML/CSS&nbsp;&nbsp; JavaScript&nbsp;&nbsp; Notion</p></div>
+      <div class="tool-row"><span>Curated finds</span><a href="mailto:zakai@kaimaz.com">What shapes how I think and build</a></div>
+      <div class="tool-row"><span>Stack</span><p>Paper&nbsp;&nbsp; Figma&nbsp;&nbsp; ChatGPT&nbsp;&nbsp; GitHub&nbsp;&nbsp; HTML/CSS&nbsp;&nbsp; JavaScript&nbsp;&nbsp; Notion</p></div>
     </section>
   </main>
 
-  <footer class="site-footer"><p><span id="local-time">Loading local time</span><span class="sleep" aria-hidden="true">☁</span></p></footer>
+  <footer class="site-footer"><p><span id="local-time">Loading local time</span><span class="status-art is-sleeping" id="work-status" role="img" aria-label="Sleeping"><i aria-hidden="true"></i><b aria-hidden="true"></b></span></p></footer>
 
   <nav class="dock" aria-label="Site">
     <div class="dock-pill"><a href="#about">About</a><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#photography">Photography</a></div>
@@ -100,6 +97,6 @@
     </a>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./script.js?v=portfolio-replica-1"></script>
+  <script src="./script.js?v=portfolio-replica-2"></script>
 </body>
 </html>

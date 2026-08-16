@@ -1,4 +1,4 @@
-const email = 'hello@yourdomain.com';
+const email = 'zakai@kaimaz.com';
 const themeToggle = document.querySelector('#theme-toggle');
 const toast = document.querySelector('#toast');
 const previewDialog = document.querySelector('#preview-dialog');
@@ -46,13 +46,6 @@ document.querySelector('#copy-email').addEventListener('click', async () => {
   catch { announce(email); }
 });
 
-const portrait = document.querySelector('#portrait-toggle');
-portrait.addEventListener('click', () => {
-  const expanded = portrait.getAttribute('aria-expanded') === 'true';
-  portrait.setAttribute('aria-expanded', String(!expanded));
-  portrait.setAttribute('aria-label', expanded ? 'Show profile artwork' : 'Hide profile artwork');
-});
-
 document.querySelectorAll('.preview-trigger').forEach((button) => button.addEventListener('click', () => {
   const preview = previews[button.dataset.preview];
   previewTitle.textContent = preview.title;
@@ -74,4 +67,37 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: .2 });
 sections.forEach((section) => observer.observe(section));
 
-document.querySelector('#local-time').textContent = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(new Date());
+const localTime = document.querySelector('#local-time');
+const workStatus = document.querySelector('#work-status');
+function updateLocalTime() {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Phoenix' }).format(now).toLowerCase();
+  const hour = Number(new Intl.DateTimeFormat('en-US', { hour: 'numeric', hourCycle: 'h23', timeZone: 'America/Phoenix' }).format(now));
+  const working = hour >= 8 && hour < 18;
+  localTime.textContent = `${parts} in Phoenix, Arizona`;
+  workStatus.classList.toggle('is-working', working);
+  workStatus.classList.toggle('is-sleeping', !working);
+  workStatus.setAttribute('aria-label', working ? 'Working' : 'Sleeping');
+}
+updateLocalTime();
+window.setInterval(updateLocalTime, 60000);
+
+let audioContext;
+function playClick() {
+  try {
+    audioContext ||= new AudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(520, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(250, audioContext.currentTime + .035);
+    gain.gain.setValueAtTime(.028, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + .04);
+    oscillator.connect(gain).connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + .045);
+  } catch { /* Audio is optional when a browser blocks it. */ }
+}
+document.addEventListener('pointerdown', (event) => {
+  if (event.target.closest('a, button')) playClick();
+});
