@@ -3,58 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A placeholder portfolio for a designer and developer." />
-  <title>Your Name — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=portfolio-placeholder-1" />
+  <meta name="description" content="An editable personal portfolio with selected web work." />
+  <title>Your Name — Selected Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=work-list-1" />
 </head>
 <body>
-  <nav class="site-nav" aria-label="Portfolio sections">
-    <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#photography">Photography</a>
-  </nav>
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme"><span aria-hidden="true">◐</span><b id="theme-label">Dark</b></button>
+  <header class="site-header">
+    <a class="wordmark" href="#about">YOUR NAME</a>
+    <nav aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-button" id="theme-button" type="button" aria-live="polite">Theme: system</button>
+  </header>
 
-  <main class="portfolio">
-    <article class="intro" id="about">
-      <button class="avatar" id="avatar-toggle" type="button" aria-label="Toggle profile artwork"><span>YN</span><i></i></button>
-      <h1>YOUR NAME</h1>
-      <p class="role">Designer &amp; developer</p>
-      <p>I help independent brands and growing businesses look sharp online, turn visits into bookings, and make their service easy to understand.</p>
-      <p>My work blends strategy, visual direction, and code—from first concept to a real site people can use. This is placeholder copy you can replace with your own story.</p>
-      <p class="availability">Available for select web projects.</p>
-      <div class="intro-actions"><button class="copy-button" id="copy-email" type="button">Copy email</button><a href="mailto:hello@yourdomain.com">Start a project ↗</a></div>
-    </article>
-
-    <section class="section" id="work" aria-labelledby="work-title">
-      <header class="section-header"><h2 id="work-title">Work</h2><span>Selected template directions</span></header>
-      <div class="project-list">
-        <article class="project"><div class="project-copy"><p>2026 — Now</p><h3>Beauty Booking</h3><p>A polished, appointment-first nail salon site with a clear service menu and booking route.</p></div><button class="preview-button" type="button" data-project="beauty" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-beauty" id="preview-beauty" hidden><div class="mock-nav"><span>THE STUDIO</span><span>BOOK NOW</span></div><strong>Make time<br>for yourself.</strong><small>Beauty / appointment placeholder</small></div></article>
-        <article class="project"><div class="project-copy"><p>2026 — Now</p><h3>Local Trade</h3><p>A direct home-service website built around fast estimates, trust, and emergency calls.</p></div><button class="preview-button" type="button" data-project="trade" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-trade" id="preview-trade" hidden><div class="mock-nav"><span>ARROW HVAC</span><span>GET HELP</span></div><strong>Comfort,<br>handled.</strong><small>Home service placeholder</small></div></article>
-        <article class="project"><div class="project-copy"><p>2025 — Now</p><h3>Custom Goods</h3><p>A product-led storefront for custom clothing, bags, hats, and everyday objects.</p></div><button class="preview-button" type="button" data-project="goods" aria-expanded="false">Preview <b>↗</b></button><div class="preview-card preview-goods" id="preview-goods" hidden><div class="mock-nav"><span>COMMON FORM</span><span>SHOP</span></div><strong>Made for<br>the everyday.</strong><small>Commerce placeholder</small></div></article>
+  <main>
+    <section class="intro" id="about" aria-labelledby="intro-title">
+      <p class="eyebrow">INDEPENDENT CREATIVE / [YOUR CITY]</p>
+      <h1 id="intro-title">I build clear, considered websites for people with something to show.</h1>
+      <p class="intro-copy">This is your space for a quick introduction—what you do, who you work with, and the kind of work you want more of. Replace every bit of placeholder text with your own.</p>
+      <div class="intro-links">
+        <button class="text-button" id="copy-email" type="button">Copy email</button>
+        <a href="mailto:hello@yourdomain.com">hello@yourdomain.com ↗</a>
       </div>
-      <a class="all-work" href="#experience">More work coming soon <span>→</span></a>
     </section>
 
-    <section class="section" id="experience" aria-labelledby="experience-title">
-      <header class="section-header"><h2 id="experience-title">Experience</h2><span>Placeholder timeline</span></header>
-      <ol class="timeline">
-        <li><time>2026 — Now</time><p><strong>Independent designer / developer</strong> for local businesses and brands.</p><small>Phoenix, AZ</small></li>
-        <li><time>2024 — 2026</time><p><strong>Digital designer</strong> creating sites, identities, and online stores.</p><small>Remote</small></li>
-        <li><time>2022 — 2024</time><p><strong>Creative generalist</strong> working across strategy, visuals, and front-end builds.</p><small>Replace this</small></li>
-      </ol>
+    <section class="work-section" id="work" aria-labelledby="work-heading">
+      <h2 id="work-heading">Work</h2>
+      <div class="work-list">
+        <article class="work-item">
+          <p class="work-date">2026 — Now</p>
+          <div class="work-content">
+            <a class="project-name" href="https://chiaraelaine.com/" target="_blank" rel="noreferrer">Chiara Elaine</a>
+            <p class="project-description">A fashion styling and creative portfolio centered on visual storytelling, wardrobe, and brand communication.</p>
+            <a class="site-preview chiara-preview" href="https://chiaraelaine.com/" target="_blank" rel="noreferrer" aria-label="View Chiara Elaine's website in a new tab">
+              <img src="https://chiaraelaine.com/ct-logos/ct-share.png" alt="Preview image from Chiara Elaine's website" />
+              <span>View live website <b>↗</b></span>
+            </a>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <p class="work-date">2026 — Now</p>
+          <div class="work-content">
+            <a class="project-name" href="https://www.beverlycorpuz.com/" target="_blank" rel="noreferrer">Beverly Corpuz</a>
+            <p class="project-description">A visual artist's portfolio for creative work, moving image, and everyday observations.</p>
+            <a class="site-preview" href="https://www.beverlycorpuz.com/" target="_blank" rel="noreferrer" aria-label="View Beverly Corpuz's website in a new tab">
+              <img src="https://image.thum.io/get/width/1000/crop/660/https://www.beverlycorpuz.com/" alt="Screenshot preview of Beverly Corpuz's website" />
+              <span>View live website <b>↗</b></span>
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <section class="section" id="photography" aria-labelledby="photo-title">
-      <header class="section-header"><h2 id="photo-title">Photography</h2><span>Placeholder image study</span></header>
-      <div class="photo-grid" aria-label="Placeholder photography grid"><figure class="photo photo-one"><figcaption>01 / after hours</figcaption></figure><figure class="photo photo-two"><figcaption>02 / warm light</figcaption></figure><figure class="photo photo-three"><figcaption>03 / object study</figcaption></figure><figure class="photo photo-four"><figcaption>04 / soft geometry</figcaption></figure><figure class="photo photo-five"><figcaption>05 / city texture</figcaption></figure><figure class="photo photo-six"><figcaption>06 / open space</figcaption></figure></div>
+    <section class="notes-section" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Notes</h2>
+      <p>Use this space for a short thought, a client note, or whatever you want people to know before they reach out.</p>
     </section>
 
-    <section class="section toolbox" aria-labelledby="toolbox-title"><header class="section-header"><h2 id="toolbox-title">Toolbox</h2><span>What I use to build</span></header><div class="tool-list"><span>Figma</span><span>Framer</span><span>GitHub</span><span>HTML / CSS</span><span>JavaScript</span><span>Shopify</span><span>Webflow</span><span>Notion</span></div></section>
+    <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Let’s make something useful.</h2>
+      <a href="mailto:hello@yourdomain.com">hello@yourdomain.com ↗</a>
+    </section>
   </main>
-  <footer><p><span id="local-time">Loading local time</span><i>•</i> <span>Built for your next client</span></p><a href="#about">Back to top ↑</a></footer>
+
+  <footer>
+    <span id="local-time">Loading local time</span>
+    <span>© <span id="year"></span> YOUR NAME</span>
+  </footer>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./script.js?v=portfolio-placeholder-1"></script>
+  <script src="./script.js?v=work-list-1"></script>
 </body>
 </html>
