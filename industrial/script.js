@@ -6,6 +6,40 @@ const previewTitle = document.querySelector('#preview-title');
 const previewImage = document.querySelector('#preview-image');
 const previewLink = document.querySelector('#preview-link');
 
+function initializeCalBooking() {
+  (function loadCalEmbed(global, source, initCommand) {
+    const enqueue = (api, args) => api.q.push(args);
+    const documentRef = global.document;
+    global.Cal = global.Cal || function calEmbed() {
+      const cal = global.Cal;
+      const args = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        documentRef.head.appendChild(documentRef.createElement('script')).src = source;
+        cal.loaded = true;
+      }
+      if (args[0] === initCommand) {
+        const namespace = args[1];
+        const api = function namespacedCalEmbed() { enqueue(api, arguments); };
+        api.q = api.q || [];
+        if (typeof namespace === 'string') {
+          cal.ns[namespace] = api;
+          enqueue(api, args);
+        } else enqueue(cal, args);
+        return;
+      }
+      enqueue(cal, args);
+    };
+  })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+  window.Cal('init', 'kaimaz-booking', { origin: 'https://cal.com' });
+  window.Cal.ns['kaimaz-booking']('ui', { layout: 'month_view' });
+  window.Cal.ns['kaimaz-booking']('preload', { calLink: 'kaimaz/30min' });
+}
+
+initializeCalBooking();
+
 const previews = {
   chiara: {
     title: 'Chiara Elaine',
