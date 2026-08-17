@@ -22,8 +22,9 @@ const previews = {
 function getTheme() { return localStorage.getItem('portfolio-theme') || 'system'; }
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  themeToggle.textContent = `Theme: ${theme}`;
   themeToggle.setAttribute('aria-label', `Theme: ${theme}`);
+  themeToggle.dataset.themeChoice = theme;
+  themeToggle.querySelectorAll('.theme-icon').forEach((icon) => icon.classList.toggle('theme-icon--active', icon.classList.contains(`theme-icon--${theme === 'system' ? 'monitor' : theme}`)));
   localStorage.setItem('portfolio-theme', theme);
 }
 function announce(message) {
@@ -38,6 +39,9 @@ themeToggle.addEventListener('click', () => {
   const themes = ['system', 'light', 'dark'];
   const next = themes[(themes.indexOf(getTheme()) + 1) % themes.length];
   applyTheme(next);
+  themeToggle.classList.remove('is-switching');
+  void themeToggle.offsetWidth;
+  themeToggle.classList.add('is-switching');
   announce(`Theme: ${next}`);
 });
 
@@ -86,16 +90,26 @@ let audioContext;
 function playClick() {
   try {
     audioContext ||= new AudioContext();
-    const oscillator = audioContext.createOscillator();
+    const now = audioContext.currentTime;
+    const tick = audioContext.createOscillator();
+    const body = audioContext.createOscillator();
     const gain = audioContext.createGain();
-    oscillator.type = 'triangle';
-    oscillator.frequency.setValueAtTime(520, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(250, audioContext.currentTime + .035);
-    gain.gain.setValueAtTime(.028, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + .04);
-    oscillator.connect(gain).connect(audioContext.destination);
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + .045);
+    tick.type = 'triangle';
+    tick.frequency.setValueAtTime(720, now);
+    tick.frequency.exponentialRampToValueAtTime(410, now + .018);
+    body.type = 'sine';
+    body.frequency.setValueAtTime(185, now);
+    body.frequency.exponentialRampToValueAtTime(120, now + .03);
+    gain.gain.setValueAtTime(.0001, now);
+    gain.gain.exponentialRampToValueAtTime(.018, now + .003);
+    gain.gain.exponentialRampToValueAtTime(.0001, now + .035);
+    tick.connect(gain);
+    body.connect(gain);
+    gain.connect(audioContext.destination);
+    tick.start(now);
+    body.start(now);
+    tick.stop(now + .03);
+    body.stop(now + .04);
   } catch { /* Audio is optional when a browser blocks it. */ }
 }
 document.addEventListener('pointerdown', (event) => {
