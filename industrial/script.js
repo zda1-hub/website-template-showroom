@@ -41,6 +41,11 @@ function initializeCalBooking() {
 initializeCalBooking();
 
 const previews = {
+  photography: {
+    title: 'Photography Showcase',
+    url: '../liquid-glass/',
+    image: './assets/photo-garden.jpg'
+  },
   chiara: {
     title: 'Chiara Elaine',
     url: 'https://chiaraelaine.com/',
