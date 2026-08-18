@@ -3,76 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Browse seven business website template collections in an infinite liquid-glass carousel." />
-  <title>Z/Archive — Liquid glass index</title>
+  <meta name="description" content="A moving archive of art-directed visual projects." />
+  <title>Z/Archive — Motion index</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles.css?v=20260834" />
 </head>
 <body>
-  <div class="liquid-bg" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="loader" id="loader" role="status" aria-label="Refracting template archive">
-    <div class="loader-core"><span></span><span></span><span></span><b>Z/</b></div>
-    <p>REFRACTING ARCHIVE <i id="loader-percent">00</i>%</p>
-  </div>
-
-  <header class="topbar">
-    <a class="brand" href="../">Z/<span>ARCHIVE</span></a>
-    <label class="search"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="SEARCH TEMPLATE TYPE" aria-label="Search templates"></label>
-    <div class="top-actions"><span id="result-count">07 / 07</span><button id="restart-home" type="button">RESTART ↻</button><a href="../industrial/">CONCRETE VIEW ↗</a></div>
-  </header>
-
+  <div class="loader" id="loader" role="status" aria-label="Opening visual archive"><div class="loader-core"><span></span><span></span><span></span><b>Z/</b></div><p>OPENING ARCHIVE <i id="loader-percent">00</i>%</p></div>
+  <header class="topbar"><a class="brand" href="../">Z/<span>ARCHIVE</span></a><label class="search"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="SEARCH PROJECTS" aria-label="Search projects"></label><div class="top-actions"><span id="result-count">12 / 12</span><button id="restart-home" type="button">RESTART ↻</button><a href="../industrial/">CONCRETE VIEW ↗</a></div></header>
   <main>
-    <div class="heading">
-      <p>Interactive website collection · Drag / scroll / explore</p>
-      <h1>Liquid<br><em>Index.</em></h1>
-    </div>
-
-    <section class="carousel-stage" id="carousel-stage" aria-label="Infinite template carousel">
-      <article class="glass-card card-nail" data-card data-search="nail salon beauty manicure pedicure appointments booking" data-title="Nail Salon" data-url="https://zda1-hub.github.io/nail-salon-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/nail-salon-templates/" title="Nail salon preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>01 · BEAUTY</span><h2>Nail Salon</h2><p>Appointments</p></div><button class="view-site" data-open aria-label="Open Nail Salon website">View website ↗</button>
-      </article>
-      <article class="glass-card card-barber" data-card data-search="barber shop haircut grooming appointments booking" data-title="Barber Shop" data-url="https://zda1-hub.github.io/barber-shop-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/barber-shop-templates/" title="Barber shop preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>02 · GROOMING</span><h2>Barber Shop</h2><p>Appointments</p></div><button class="view-site" data-open aria-label="Open Barber Shop website">View website ↗</button>
-      </article>
-      <article class="glass-card card-auto" data-card data-search="mechanic auto automotive garage repair car service" data-title="Mechanic" data-url="https://zda1-hub.github.io/mechanic-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/mechanic-templates/" title="Mechanic preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>03 · AUTOMOTIVE</span><h2>Mechanic</h2><p>Service</p></div><button class="view-site" data-open aria-label="Open Mechanic website">View website ↗</button>
-      </article>
-      <article class="glass-card card-hvac" data-card data-search="hvac heating cooling air conditioning emergency home service" data-title="HVAC" data-url="https://zda1-hub.github.io/hvac-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/hvac-templates/" title="HVAC preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>04 · HOME SERVICE</span><h2>HVAC</h2><p>Calls + booking</p></div><button class="view-site" data-open aria-label="Open HVAC website">View website ↗</button>
-      </article>
-      <article class="glass-card card-roof" data-card data-search="roofing roofer roof contractor home service quote inspection" data-title="Roofing" data-url="https://zda1-hub.github.io/roofing-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/roofing-templates/" title="Roofing preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>05 · CONTRACTOR</span><h2>Roofing</h2><p>Quotes</p></div><button class="view-site" data-open aria-label="Open Roofing website">View website ↗</button>
-      </article>
-      <article class="glass-card card-goods" data-card data-search="clothing apparel custom goods bags hats embroidery printing ecommerce orders" data-title="Clothing / Custom Goods" data-url="https://zda1-hub.github.io/clothing-custom-goods-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/clothing-custom-goods-templates/" title="Custom goods preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>06 · COMMERCE</span><h2>Custom Goods</h2><p>Orders</p></div><button class="view-site" data-open aria-label="Open Custom Goods website">View website ↗</button>
-      </article>
-      <article class="glass-card card-food" data-card data-search="restaurant food dining menu cafe hospitality reservation table" data-title="Food / Restaurant" data-url="https://zda1-hub.github.io/restaurant-templates/">
-        <div class="card-screen"><iframe src="https://zda1-hub.github.io/restaurant-templates/" title="Restaurant preview" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="card-meta"><span>07 · HOSPITALITY</span><h2>Restaurant</h2><p>Reservations</p></div><button class="view-site" data-open aria-label="Open Restaurant website">View website ↗</button>
-      </article>
-      <div class="empty" id="empty"><p>No surface found.</p><button id="reset-search" type="button">Reset search ↗</button></div>
-    </section>
-
-    <div class="carousel-controls">
-      <button id="previous" type="button" aria-label="Previous template">←</button>
-      <div><span>DRAG CARDS</span><i></i><span>CLICK VIEW WEBSITE</span></div>
-      <button id="next" type="button" aria-label="Next template">→</button>
-    </div>
-    <div class="footer-line"><span>INFINITE SURFACE / WEB COLLECTION 2026</span><div><button id="restart-footer" type="button">RESTART ↻</button><a href="../">CHANGE EXPERIENCE ↗</a></div></div>
+    <div class="intro"><p>Selected visual work · Scroll / drag / explore</p><h1>Liquid<br><em>Index.</em></h1></div>
+    <section class="archive is-opening" id="archive" aria-label="Moving project archive"><div class="opening-sequence" id="opening-sequence" aria-hidden="true"><div class="opening-card opening-card-top"><img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=600&q=88" alt="" /></div><div class="opening-card opening-card-center"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=88" alt="" /></div><div class="opening-card opening-card-bottom"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=88" alt="" /></div></div><div class="category-rail" id="category-rail" aria-hidden="true"></div><div class="project-stage" id="project-stage"></div><div class="project-info"><span id="project-index">01</span><h2 id="project-title">Blue hour</h2><button id="project-view" type="button">View ↗</button><p id="project-category">Photography</p><span id="project-year">2025</span></div></section>
+    <div class="archive-controls"><button id="previous" type="button" aria-label="Previous project">←</button><span>DRAG TO EXPLORE</span><button id="next" type="button" aria-label="Next project">→</button></div>
+    <div class="footer-line"><span>MOTION INDEX / 2026</span><div><button id="restart-footer" type="button">RESTART ↻</button><a href="../">CHANGE EXPERIENCE ↗</a></div></div>
   </main>
-
-  <dialog class="preview" id="preview">
-    <div class="preview-bar"><div><span>LIVE SITE /</span><strong id="preview-title">Template</strong></div><a id="external-link" href="#" target="_blank" rel="noreferrer">Open in new tab ↗</a><div class="preview-actions"><button id="restart-preview" type="button">Restart experience ↻</button><button id="close-preview" type="button" aria-label="Return to liquid carousel">Return to liquid ×</button></div></div>
-    <iframe id="preview-frame" title="Full website preview"></iframe>
-  </dialog>
-  <script src="./script.js"></script>
+  <dialog class="preview" id="preview"><div class="preview-bar"><div><span>IMAGE /</span><strong id="preview-title">Project</strong></div><a id="external-link" href="#" target="_blank" rel="noreferrer">Open original ↗</a><button id="close-preview" type="button">Close ×</button></div><img id="preview-image" alt="" /><p id="preview-meta"></p></dialog>
+  <svg class="visual-filters" aria-hidden="true" width="0" height="0" focusable="false">
+    <filter id="photo-bubble" x="-35%" y="-15%" width="170%" height="130%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.075" numOctaves="2" seed="8" result="warp" />
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="8" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+  <script src="./script.js?v=20260823"></script>
 </body>
 </html>
