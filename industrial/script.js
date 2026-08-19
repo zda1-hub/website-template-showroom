@@ -41,6 +41,31 @@ function initializeCalBooking() {
 initializeCalBooking();
 
 const previews = {
+  'photo-church': {
+    title: 'Church tower at dusk',
+    url: './assets/photo-church.jpg',
+    image: './assets/photo-church.jpg'
+  },
+  'photo-branches': {
+    title: 'Tree branches over water',
+    url: './assets/photo-branches.jpg',
+    image: './assets/photo-branches.jpg'
+  },
+  'photo-forest': {
+    title: 'Forest trail in dappled light',
+    url: './assets/photo-forest.jpg',
+    image: './assets/photo-forest.jpg'
+  },
+  'photo-garden': {
+    title: 'Garden viewed from a wooden pavilion',
+    url: './assets/photo-garden.jpg',
+    image: './assets/photo-garden.jpg'
+  },
+  'photo-trees': {
+    title: 'Evergreen trees and bright leaves',
+    url: './assets/photo-trees.jpg',
+    image: './assets/photo-trees.jpg'
+  },
   photography: {
     title: 'Photography Showcase',
     url: '../liquid-glass/',
@@ -89,7 +114,7 @@ document.querySelector('#copy-email').addEventListener('click', async () => {
   catch { announce(email); }
 });
 
-document.querySelectorAll('.preview-trigger').forEach((button) => button.addEventListener('click', () => {
+document.querySelectorAll('.preview-trigger, .photo-preview-trigger').forEach((button) => button.addEventListener('click', () => {
   const preview = previews[button.dataset.preview];
   previewTitle.textContent = preview.title;
   previewLink.href = preview.url;
