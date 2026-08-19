@@ -100,7 +100,7 @@ function render() {
   $("#category-rail").innerHTML = projects.map((project, i) => `<span class="${i === mod(index, projects.length) ? "selected" : ""}">${project.tag}</span>`).join("");
 }
 function step(amount) { target = mod(Math.round(target) + amount, projects.length); render(); }
-function openPreview(project) { $("#preview-title").textContent = project.title; $("#preview-image").src = project.image; $("#preview-image").alt = project.title; $("#preview-meta").textContent = `${project.tag}  ·  ${project.category}  ·  ${project.year}`; $("#external-link").href = project.image; $("#preview").showModal(); }
+function openPreview(project) { $("#preview-image").src = project.image; $("#preview-image").alt = project.title; $("#preview").showModal(); }
 function closePreview() { $("#preview").close(); $("#preview-image").src = ""; }
 function openProjectSite(project) { const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); window.location.href = `./project.html?project=${slug}`; }
 render();
