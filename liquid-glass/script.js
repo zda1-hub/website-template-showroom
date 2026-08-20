@@ -100,17 +100,19 @@ function render() {
   $("#category-rail").innerHTML = projects.map((project, i) => `<span class="${i === mod(index, projects.length) ? "selected" : ""}">${project.tag}</span>`).join("");
 }
 function step(amount) { target = mod(Math.round(target) + amount, projects.length); render(); }
-function openPreview(project) { $("#preview-image").src = project.image; $("#preview-image").alt = project.title; $("#preview").showModal(); }
-function closePreview() { $("#preview").close(); $("#preview-image").src = ""; }
+let previewTrigger = null;
+function openPreview(project, trigger = document.activeElement) { previewTrigger = trigger; $("#preview-image").src = project.image; $("#preview-image").alt = project.title; $("#preview").hidden = false; $("#close-preview").focus(); }
+function closePreview() { $("#preview").hidden = true; $("#preview-image").src = ""; previewTrigger?.focus?.(); }
 render();
 setTimeout(() => $("#archive").classList.remove("is-opening"), 3300);
-$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("click", () => openPreview(projects[mod(index, projects.length)])); $("#close-preview").addEventListener("click", closePreview);
+$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("click", (event) => openPreview(projects[mod(index, projects.length)], event.currentTarget)); $("#close-preview").addEventListener("click", closePreview);
 $("#preview").addEventListener("click", (event) => { if (event.target === $("#preview")) closePreview(); });
+document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#preview").hidden) closePreview(); });
 $("#archive").addEventListener("wheel", (event) => { event.preventDefault(); wheelTravel += event.deltaY * .4; if (Math.abs(wheelTravel) >= 120) { step(wheelTravel > 0 ? 1 : -1); wheelTravel = 0; } }, { passive: false });
 $("#archive").addEventListener("pointerdown", (event) => { dragging = true; startY = event.clientY; startTarget = target; $("#archive").setPointerCapture(event.pointerId); });
 $("#archive").addEventListener("pointermove", (event) => { updateBubble(event); if (!dragging) return; const delta = event.clientY - startY; target = startTarget - delta / 275; render(); });
 $("#archive").addEventListener("pointerup", () => { dragging = false; target = mod(Math.round(target), projects.length); render(); });
 $("#archive").addEventListener("pointerleave", () => { const tile = stage.querySelector(".tile-0"); if (tile && tile.dataset.touchArmed !== "1") tile.classList.remove("is-hovered"); stage.querySelectorAll(".is-reaching").forEach((targetTile) => { targetTile.classList.remove("is-reaching"); targetTile.style.setProperty("--reach", "0"); targetTile.style.setProperty("--reach-x", "0px"); targetTile.style.setProperty("--reach-y", "0px"); }); });
 const search = $("#search"); search.addEventListener("input", () => { const query = search.value.toLowerCase().trim(); const matches = projects.filter((project) => `${project.title} ${project.category} ${project.tag}`.toLowerCase().includes(query)); $("#result-count").textContent = `${String(matches.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`; if (matches.length) { target = projects.indexOf(matches[0]); render(); } });
-function restart() { if ($("#preview").open) closePreview(); search.value = ""; target = 0; $("#result-count").textContent = `${String(projects.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`; render(); $("#archive").classList.add("is-opening"); const opening = $("#opening-sequence"); opening.replaceWith(opening.cloneNode(true)); setTimeout(() => $("#archive").classList.remove("is-opening"), 3300); }
+function restart() { if (!$("#preview").hidden) closePreview(); search.value = ""; target = 0; $("#result-count").textContent = `${String(projects.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`; render(); $("#archive").classList.add("is-opening"); const opening = $("#opening-sequence"); opening.replaceWith(opening.cloneNode(true)); setTimeout(() => $("#archive").classList.remove("is-opening"), 3300); }
 $("#restart-home").addEventListener("click", restart); $("#restart-footer").addEventListener("click", restart);
