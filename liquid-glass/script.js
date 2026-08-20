@@ -65,11 +65,11 @@ function render() {
   if (!stage.children.length) projects.forEach((project) => {
     const tile = document.createElement("button");
     tile.type = "button";
-    tile.innerHTML = `<img src="${project.image}" alt="${project.title}" /><i class="edge edge-up" aria-hidden="true"></i><i class="edge edge-down" aria-hidden="true"></i><i class="bridge bridge-up" aria-hidden="true"></i><i class="bridge bridge-down" aria-hidden="true"></i><span>${project.tag}</span><b class="hover-view">View ↗</b>`;
+    tile.innerHTML = `<img src="${project.image}" alt="${project.title}" /><i class="edge edge-up" aria-hidden="true"></i><i class="edge edge-down" aria-hidden="true"></i><i class="bridge bridge-up" aria-hidden="true"></i><i class="bridge bridge-down" aria-hidden="true"></i><span>${project.tag}</span>`;
     tile.addEventListener("click", (event) => { const offset = Number(tile.dataset.offset); if (offset === 0) { if (event.pointerType === "touch" && tile.dataset.touchArmed === "1") { tile.dataset.touchArmed = "0"; return; } openPreview(projects[mod(index, projects.length)]); } else step(offset); });
     tile.addEventListener("pointerdown", (event) => { if (event.pointerType === "touch" && tile.dataset.offset === "0") { if (tile.dataset.touchArmed === "1") tile.dataset.touchArmed = "0"; else { tile.dataset.touchArmed = "1"; tile.classList.add("is-hovered"); } } });
-    tile.addEventListener("pointermove", (event) => { if (tile.dataset.offset !== "0") return; const rect = tile.getBoundingClientRect(); const x = event.clientX - rect.left; const y = event.clientY - rect.top; tile.classList.add("is-hovered"); tile.style.setProperty("--hover-x", `${x}px`); tile.style.setProperty("--hover-y", `${y}px`); tile.style.setProperty("--tilt-x", `${(x / rect.width - .5) * 8}deg`); tile.style.setProperty("--tilt-y", `${(y / rect.height - .5) * -8}deg`); });
-    tile.addEventListener("pointerleave", () => { if (tile.dataset.touchArmed !== "1") tile.classList.remove("is-hovered"); tile.style.setProperty("--hover-x", "50%"); tile.style.setProperty("--hover-y", "50%"); tile.style.setProperty("--tilt-x", "0deg"); tile.style.setProperty("--tilt-y", "0deg"); });
+    tile.addEventListener("pointermove", (event) => { if (tile.dataset.offset !== "0") return; const rect = tile.getBoundingClientRect(); const x = event.clientX - rect.left; const y = event.clientY - rect.top; tile.classList.add("is-hovered"); tile.style.setProperty("--tilt-x", `${(x / rect.width - .5) * 8}deg`); tile.style.setProperty("--tilt-y", `${(y / rect.height - .5) * -8}deg`); });
+    tile.addEventListener("pointerleave", () => { if (tile.dataset.touchArmed !== "1") tile.classList.remove("is-hovered"); tile.style.setProperty("--tilt-x", "0deg"); tile.style.setProperty("--tilt-y", "0deg"); });
     stage.append(tile);
   });
   const tileGap = Math.min(250, Math.max(120, window.innerWidth * .32));
@@ -102,10 +102,9 @@ function render() {
 function step(amount) { target = mod(Math.round(target) + amount, projects.length); render(); }
 function openPreview(project) { $("#preview-image").src = project.image; $("#preview-image").alt = project.title; $("#preview").showModal(); }
 function closePreview() { $("#preview").close(); $("#preview-image").src = ""; }
-function openProjectSite(project) { const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); window.location.href = `./project.html?project=${slug}`; }
 render();
 setTimeout(() => $("#archive").classList.remove("is-opening"), 3300);
-$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("click", () => openProjectSite(projects[mod(index, projects.length)])); $("#close-preview").addEventListener("click", closePreview);
+$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("click", () => openPreview(projects[mod(index, projects.length)])); $("#close-preview").addEventListener("click", closePreview);
 $("#preview").addEventListener("click", (event) => { if (event.target === $("#preview")) closePreview(); });
 $("#archive").addEventListener("wheel", (event) => { event.preventDefault(); wheelTravel += event.deltaY * .4; if (Math.abs(wheelTravel) >= 120) { step(wheelTravel > 0 ? 1 : -1); wheelTravel = 0; } }, { passive: false });
 $("#archive").addEventListener("pointerdown", (event) => { dragging = true; startY = event.clientY; startTarget = target; $("#archive").setPointerCapture(event.pointerId); });
