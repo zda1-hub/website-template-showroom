@@ -105,7 +105,7 @@ function openPreview(project, trigger = document.activeElement) { previewTrigger
 function closePreview() { $("#preview").hidden = true; $("#preview-image").src = ""; previewTrigger?.focus?.(); }
 render();
 setTimeout(() => $("#archive").classList.remove("is-opening"), 3300);
-$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("click", (event) => openPreview(projects[mod(index, projects.length)], event.currentTarget)); $("#close-preview").addEventListener("click", closePreview);
+$("#next").addEventListener("click", () => step(1)); $("#previous").addEventListener("click", () => step(-1)); $("#project-view").addEventListener("pointerdown", (event) => event.stopPropagation()); $("#project-view").addEventListener("click", (event) => { event.stopPropagation(); openPreview(projects[mod(index, projects.length)], event.currentTarget); }); $("#close-preview").addEventListener("click", closePreview);
 $("#preview").addEventListener("click", (event) => { if (event.target === $("#preview")) closePreview(); });
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#preview").hidden) closePreview(); });
 $("#archive").addEventListener("wheel", (event) => { event.preventDefault(); wheelTravel += event.deltaY * .4; if (Math.abs(wheelTravel) >= 120) { step(wheelTravel > 0 ? 1 : -1); wheelTravel = 0; } }, { passive: false });
